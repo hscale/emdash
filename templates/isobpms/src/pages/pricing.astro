@@ -1,42 +1,120 @@
 ---
 import { getEmDashEntry, getEmDashCollection } from "emdash";
 import Base from "../layouts/Base.astro";
-import Hero from "../components/blocks/Hero.astro";
-import Pricing from "../components/blocks/Pricing.astro";
-import FAQ from "../components/blocks/FAQ.astro";
 import { t } from "../i18n/ui";
 
 const locale = Astro.currentLocale || "en";
 const { entry: page, cacheHint } = await getEmDashEntry("pages", "pricing");
 const { entries: plans } = await getEmDashCollection("pricing_plans", { orderBy: { sort_order: "asc" } });
-const { entries: faqItems } = await getEmDashCollection("faq_items", { where: { page: "pricing" }, orderBy: { sort_order: "asc" } });
+const { entries: allFaq } = await getEmDashCollection("faq_items", { orderBy: { sort_order: "asc" } });
+const faqItems = allFaq.filter(e => e.data.page === "pricing");
 
-try {
-	Astro.cache.set(cacheHint);
-} catch {}
+try { Astro.cache.set(cacheHint); } catch {}
+const p = page?.data;
 ---
 
 <Base title={t(locale, "nav.pricing")}>
-	<Hero node={{
-		headline: page?.data.hero_headline || "Simple, transparent pricing",
-		subheadline: page?.data.hero_subheadline,
-		centered: true,
-	}} />
 
-	<Pricing node={{
-		plans: plans.map(e => ({
-			name: e.data.name,
-			price: e.data.price,
-			period: e.data.period || "",
-			description: e.data.description || "",
-			features: (e.data.features_list || "").split("\n").filter((f: string) => f.trim()),
-			cta: { label: e.data.cta_label || "Get Started", url: e.data.cta_url || "#" },
-			highlighted: e.data.highlighted || false,
-		})),
-	}} />
+	<section class="hero-centered">
+		<h1>{p?.hero_headline || "Simple, transparent pricing"}</h1>
+		<p>{p?.hero_subheadline}</p>
+	</section>
 
-	<FAQ node={{
-		headline: "Pricing FAQ",
-		items: faqItems.map(e => ({ question: e.data.question, answer: e.data.answer })),
-	}} />
+	<section class="sec">
+		<div class="container">
+			<div class="pricing-grid">
+				{plans.map(e => {
+					const feats = (e.data.features_list || "").split("\n").filter((f: string) => f.trim());
+					return (
+						<div class:list={["pricing-card", { highlighted: e.data.highlighted }]}>
+							{e.data.highlighted && <div class="pricing-badge">Most popular</div>}
+							<div class="pricing-header">
+								<h3>{e.data.name}</h3>
+								<div class="pricing-price">
+									<span class="price-amount">{e.data.price}</span>
+									{e.data.period && <span class="price-period">{e.data.period}</span>}
+								</div>
+								{e.data.description && <p class="price-desc">{e.data.description}</p>}
+							</div>
+							<ul class="pricing-features">
+								{feats.map((f: string) => (
+									<li>
+										<svg class="check" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+										{f}
+									</li>
+								))}
+							</ul>
+							<a href={e.data.cta_url || "#"} class:list={["pricing-cta", { "cta-accent": e.data.highlighted, "cta-outline": !e.data.highlighted }]}>
+								{e.data.cta_label || "Get Started"}
+							</a>
+						</div>
+					);
+				})}
+			</div>
+		</div>
+	</section>
+
+	{faqItems.length > 0 && (
+		<section class="sec sec-surface">
+			<div class="container">
+				<header class="sec-head"><h2>{t(locale, "section.pricingFaq")}</h2></header>
+				<div class="faq-list">
+					{faqItems.map(e => (
+						<details class="faq-item" name="faq">
+							<summary>
+								<span>{e.data.question}</span>
+								<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+							</summary>
+							<div class="faq-answer"><p>{e.data.answer}</p></div>
+						</details>
+					))}
+				</div>
+			</div>
+		</section>
+	)}
+
 </Base>
+
+<style>
+	.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+	.sec { padding: 2rem 0 4rem; }
+	.sec-surface { background: var(--color-surface); padding: 4rem 0; }
+	.sec-head { text-align: center; margin-bottom: 2.5rem; }
+	.sec-head h2 { font-size: 2rem; font-weight: 800; }
+
+	.hero-centered { text-align: center; max-width: 600px; margin: 0 auto; padding: 3rem 1.5rem 1rem; }
+	.hero-centered h1 { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; color: var(--color-brand-navy); margin-bottom: .5rem; }
+	.hero-centered p { font-size: 1.1rem; color: var(--color-muted); }
+
+	.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; align-items: start; }
+	.pricing-card { position: relative; padding: 1.5rem; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; display: flex; flex-direction: column; gap: 1.25rem; }
+	.pricing-card.highlighted { background: var(--color-bg); border-color: var(--color-brand-green); box-shadow: var(--shadow-xl); transform: scale(1.02); }
+	.pricing-badge { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); padding: 3px 12px; font-size: .7rem; font-weight: 600; color: #fff; background: linear-gradient(135deg, var(--color-accent-dark), var(--color-accent)); border-radius: 99px; }
+	.pricing-header { text-align: center; padding-bottom: 1rem; border-bottom: 1px solid var(--color-border); }
+	.pricing-header h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: .5rem; }
+	.pricing-price { display: flex; align-items: baseline; justify-content: center; gap: 4px; margin-bottom: .25rem; }
+	.price-amount { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; }
+	.price-period { font-size: .875rem; color: var(--color-muted); }
+	.price-desc { font-size: .875rem; color: var(--color-muted); }
+	.pricing-features { list-style: none; flex: 1; display: flex; flex-direction: column; gap: .4rem; }
+	.pricing-features li { display: flex; align-items: flex-start; gap: .5rem; font-size: .875rem; }
+	.check { width: 16px; height: 16px; flex-shrink: 0; color: var(--color-brand-green); margin-top: 2px; }
+	.pricing-cta { display: block; text-align: center; padding: .75rem; font-weight: 600; font-size: .95rem; border-radius: 8px; transition: all .15s; }
+	.cta-accent { color: #fff; background: linear-gradient(135deg, var(--color-accent-dark), var(--color-accent)); }
+	.cta-accent:hover { box-shadow: var(--shadow-lg); transform: translateY(-1px); }
+	.cta-outline { color: var(--color-text); border: 1px solid var(--color-border); }
+	.cta-outline:hover { background: var(--color-surface); }
+
+	.faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: .5rem; }
+	.faq-item { background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 8px; overflow: hidden; }
+	.faq-item:hover { border-color: var(--color-muted); }
+	.faq-item[open] { border-color: var(--color-brand-green); }
+	.faq-item summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 1.25rem; font-weight: 600; font-size: .95rem; cursor: pointer; list-style: none; }
+	.faq-item summary::-webkit-details-marker { display: none; }
+	.faq-item summary svg { flex-shrink: 0; color: var(--color-muted); transition: transform .2s; }
+	.faq-item[open] summary svg { transform: rotate(180deg); }
+	.faq-answer { padding: 0 1.25rem 1rem; }
+	.faq-answer p { font-size: .875rem; color: var(--color-muted); line-height: 1.7; }
+
+	@media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; } .pricing-card.highlighted { transform: none; } }
+</style>
