@@ -1,0 +1,133 @@
+---
+interface Props {
+	node: {
+		_key?: string;
+		headline?: string;
+		subheadline?: string;
+		capabilities: Array<{
+			title: string;
+			description: string;
+			icon: string;
+		}>;
+	};
+}
+
+const { node } = Astro.props;
+const { _key, headline, subheadline, capabilities } = node;
+---
+
+<section class="ai-core section" id={_key}>
+	<div class="container">
+		{(headline || subheadline) && (
+			<header class="ai-core-header">
+				{headline && <h2 class="ai-core-headline">{headline}</h2>}
+				{subheadline && <p class="ai-core-subheadline">{subheadline}</p>}
+			</header>
+		)}
+		<div class="ai-core-grid">
+			{capabilities.map((cap) => (
+				<div class="ai-card">
+					<div class="ai-card-badge">Built-in</div>
+					<div class="ai-card-icon">
+						<i class={`ph ph-${cap.icon}`} aria-hidden="true"></i>
+					</div>
+					<h3 class="ai-card-title">{cap.title}</h3>
+					<p class="ai-card-description">{cap.description}</p>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.ai-core {
+		background: var(--color-surface);
+	}
+
+	.ai-core-header {
+		text-align: center;
+		max-width: var(--max-width);
+		margin: 0 auto var(--spacing-4xl);
+	}
+
+	.ai-core-headline {
+		font-size: var(--font-size-3xl);
+		font-weight: 800;
+		margin-bottom: var(--spacing-md);
+		color: var(--color-brand-navy);
+	}
+
+	.ai-core-subheadline {
+		font-size: var(--font-size-lg);
+		color: var(--color-muted);
+	}
+
+	.ai-core-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--spacing-xl);
+	}
+
+	.ai-card {
+		position: relative;
+		padding: var(--spacing-xl);
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+	}
+
+	.ai-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-lg);
+		border-color: var(--color-brand-green);
+	}
+
+	.ai-card-badge {
+		display: inline-block;
+		padding: 2px var(--spacing-sm);
+		font-size: var(--font-size-xs);
+		font-weight: 600;
+		color: var(--color-accent-dark);
+		background: rgba(123, 192, 59, 0.12);
+		border-radius: var(--radius-full);
+		margin-bottom: var(--spacing-md);
+	}
+
+	.ai-card-icon {
+		width: 48px;
+		height: 48px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.5rem;
+		color: white;
+		background: linear-gradient(135deg, var(--color-brand-navy), var(--color-indigo));
+		border-radius: var(--radius);
+		margin-bottom: var(--spacing-lg);
+	}
+
+	.ai-card-title {
+		font-size: var(--font-size-lg);
+		font-weight: 700;
+		margin-bottom: var(--spacing-sm);
+	}
+
+	.ai-card-description {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		line-height: 1.6;
+	}
+
+	@media (max-width: 900px) {
+		.ai-core-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.ai-core-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

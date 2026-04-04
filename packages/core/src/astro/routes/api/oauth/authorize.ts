@@ -130,9 +130,8 @@ export const GET: APIRoute = async ({ url, request, locals }) => {
 
 	// If not authenticated, redirect to login with return URL
 	if (!user) {
-		const loginUrl = new URL("/_emdash/admin/login", url.origin);
-		loginUrl.searchParams.set("redirect", url.pathname + url.search);
-		return Response.redirect(loginUrl.toString(), 302);
+		const redirectTarget = encodeURIComponent(url.pathname + url.search);
+		return Response.redirect(`/_emdash/admin/login?redirect=${redirectTarget}`, 302);
 	}
 
 	// Parse and validate scopes

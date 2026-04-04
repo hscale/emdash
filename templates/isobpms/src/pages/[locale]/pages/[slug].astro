@@ -1,0 +1,37 @@
+---
+import { getEmDashEntry } from "emdash";
+import Base from "../../../layouts/Base.astro";
+
+const { slug } = Astro.params;
+const locale = Astro.currentLocale || "en";
+
+if (!slug) return Astro.redirect(`/${locale}/`);
+
+if (slug === "home") return Astro.redirect(`/${locale}/`);
+if (slug === "pricing") return Astro.redirect(`/${locale}/pricing`);
+if (slug === "contact") return Astro.redirect(`/${locale}/contact`);
+
+const { entry: page, cacheHint } = await getEmDashEntry("pages", slug, { locale });
+
+try {
+	Astro.cache.set(cacheHint);
+} catch {}
+
+if (!page) return Astro.rewrite("/404");
+---
+
+<Base title={page.data.title}>
+	<section class="page-content">
+		<div class="container">
+			<h1>{page.data.title}</h1>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.page-content {
+		max-width: var(--max-width);
+		margin: 0 auto;
+		padding: var(--spacing-4xl) var(--spacing-lg);
+	}
+</style>

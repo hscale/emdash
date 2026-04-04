@@ -1,0 +1,205 @@
+---
+interface Props {
+	node: {
+		headline: string;
+		subheadline?: string;
+		primaryCta?: { label: string; url: string };
+		secondaryCta?: { label: string; url: string };
+		centered?: boolean;
+	};
+}
+
+const { node } = Astro.props;
+const { headline, subheadline, primaryCta, secondaryCta, centered } = node;
+---
+
+<section class:list={["hero", { "hero-centered": centered }]}>
+	<div class="hero-content">
+		<h1 class="hero-headline">{headline}</h1>
+		{subheadline && <p class="hero-subheadline">{subheadline}</p>}
+		{(primaryCta || secondaryCta) && (
+			<div class="hero-actions">
+				{primaryCta && (
+					<a href={primaryCta.url} class="btn btn-accent btn-lg">
+						{primaryCta.label}
+					</a>
+				)}
+				{secondaryCta && (
+					<a href={secondaryCta.url} class="btn btn-secondary btn-lg">
+						{secondaryCta.label}
+					</a>
+				)}
+			</div>
+		)}
+	</div>
+	{!centered && (
+		<div class="hero-visual" aria-hidden="true">
+			<div class="hero-graphic">
+				<div class="graphic-node node-1">
+					<i class="ph ph-flow-arrow"></i>
+				</div>
+				<div class="graphic-node node-2">
+					<i class="ph ph-gear"></i>
+				</div>
+				<div class="graphic-node node-3">
+					<i class="ph ph-check-circle"></i>
+				</div>
+				<div class="graphic-node node-4">
+					<i class="ph ph-lightning"></i>
+				</div>
+				<svg class="graphic-lines" viewBox="0 0 400 300">
+					<path d="M80 80 L200 60 L320 80" stroke="var(--color-brand-green)" stroke-width="2" fill="none" opacity="0.4" />
+					<path d="M200 60 L200 180" stroke="var(--color-brand-navy)" stroke-width="2" fill="none" opacity="0.4" />
+					<path d="M80 180 L200 180 L320 180" stroke="var(--color-brand-green)" stroke-width="2" fill="none" opacity="0.3" />
+					<path d="M80 80 L80 180" stroke="var(--color-brand-navy)" stroke-width="2" fill="none" opacity="0.3" />
+					<path d="M320 80 L320 180" stroke="var(--color-brand-navy)" stroke-width="2" fill="none" opacity="0.3" />
+				</svg>
+			</div>
+		</div>
+	)}
+</section>
+
+<style>
+	.hero {
+		max-width: var(--wide-width);
+		margin: 0 auto;
+		padding: var(--spacing-4xl) var(--spacing-lg);
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--spacing-2xl);
+		align-items: center;
+	}
+
+	.hero-centered {
+		grid-template-columns: 1fr;
+		text-align: center;
+		max-width: var(--max-width);
+		padding-top: var(--spacing-4xl);
+		padding-bottom: var(--spacing-xl);
+	}
+
+	.hero-centered .hero-content {
+		max-width: 100%;
+	}
+
+	.hero-centered .hero-actions {
+		justify-content: center;
+	}
+
+	.hero-content {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-lg);
+		max-width: 560px;
+	}
+
+	.hero-headline {
+		font-size: var(--font-size-5xl);
+		font-weight: 800;
+		line-height: 1.1;
+		letter-spacing: -0.03em;
+		color: var(--color-brand-navy);
+	}
+
+	.hero-subheadline {
+		font-size: var(--font-size-xl);
+		line-height: 1.6;
+		color: var(--color-muted);
+	}
+
+	.hero-actions {
+		display: flex;
+		gap: var(--spacing-md);
+		flex-wrap: wrap;
+	}
+
+	.hero-visual {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.hero-graphic {
+		position: relative;
+		width: 400px;
+		height: 300px;
+	}
+
+	.graphic-node {
+		position: absolute;
+		width: 64px;
+		height: 64px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: var(--radius-lg);
+		font-size: 1.5rem;
+		box-shadow: var(--shadow-lg);
+		z-index: 1;
+	}
+
+	.node-1 {
+		top: 40px;
+		left: 48px;
+		background: var(--color-brand-navy);
+		color: white;
+	}
+
+	.node-2 {
+		top: 20px;
+		right: 48px;
+		background: var(--color-brand-green);
+		color: white;
+	}
+
+	.node-3 {
+		bottom: 60px;
+		left: 48px;
+		background: var(--color-indigo);
+		color: white;
+	}
+
+	.node-4 {
+		bottom: 60px;
+		right: 48px;
+		background: var(--color-accent-dark);
+		color: white;
+	}
+
+	.graphic-lines {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	@media (max-width: 1024px) {
+		.hero {
+			grid-template-columns: 1fr;
+			padding: var(--spacing-2xl) var(--spacing-lg);
+			text-align: center;
+		}
+
+		.hero-content {
+			max-width: 100%;
+		}
+
+		.hero-actions {
+			justify-content: center;
+		}
+
+		.hero-headline {
+			font-size: var(--font-size-4xl);
+		}
+
+		.hero-visual {
+			order: -1;
+		}
+
+		.hero-graphic {
+			width: 320px;
+			height: 240px;
+		}
+	}
+</style>

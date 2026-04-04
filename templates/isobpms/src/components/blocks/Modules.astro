@@ -1,0 +1,138 @@
+---
+interface Props {
+	node: {
+		_key?: string;
+		headline?: string;
+		subheadline?: string;
+		modules: Array<{
+			name: string;
+			description: string;
+			objectCount: number;
+			icon: string;
+		}>;
+	};
+}
+
+const { node } = Astro.props;
+const { _key, headline, subheadline, modules } = node;
+---
+
+<section class="modules section" id={_key}>
+	<div class="container">
+		{(headline || subheadline) && (
+			<header class="modules-header">
+				{headline && <h2 class="modules-headline">{headline}</h2>}
+				{subheadline && <p class="modules-subheadline">{subheadline}</p>}
+			</header>
+		)}
+		<div class="modules-grid">
+			{modules.map((mod) => (
+				<div class="module-card">
+					<div class="module-icon">
+						<i class={`ph ph-${mod.icon}`} aria-hidden="true"></i>
+					</div>
+					<div class="module-content">
+						<h3 class="module-name">{mod.name}</h3>
+						<p class="module-description">{mod.description}</p>
+					</div>
+					<div class="module-meta">
+						<span class="module-count">{mod.objectCount} objects</span>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.modules {
+		background: var(--color-surface);
+	}
+
+	.modules-header {
+		text-align: center;
+		max-width: var(--max-width);
+		margin: 0 auto var(--spacing-4xl);
+	}
+
+	.modules-headline {
+		font-size: var(--font-size-3xl);
+		font-weight: 800;
+		margin-bottom: var(--spacing-md);
+	}
+
+	.modules-subheadline {
+		font-size: var(--font-size-lg);
+		color: var(--color-muted);
+	}
+
+	.modules-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: var(--spacing-lg);
+	}
+
+	.module-card {
+		display: flex;
+		flex-direction: column;
+		gap: var(--spacing-md);
+		padding: var(--spacing-xl);
+		background: var(--color-bg);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		transition: transform var(--transition-base), box-shadow var(--transition-base), border-color var(--transition-base);
+	}
+
+	.module-card:hover {
+		transform: translateY(-4px);
+		box-shadow: var(--shadow-lg);
+		border-color: var(--color-brand-green);
+	}
+
+	.module-icon {
+		width: 44px;
+		height: 44px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 1.25rem;
+		color: var(--color-brand-navy);
+		background: rgba(123, 192, 59, 0.12);
+		border-radius: var(--radius);
+	}
+
+	.module-name {
+		font-size: var(--font-size-lg);
+		font-weight: 700;
+	}
+
+	.module-description {
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		line-height: 1.5;
+	}
+
+	.module-meta {
+		margin-top: auto;
+		padding-top: var(--spacing-sm);
+		border-top: 1px solid var(--color-border);
+	}
+
+	.module-count {
+		font-size: var(--font-size-xs);
+		font-weight: 600;
+		color: var(--color-brand-green);
+	}
+
+	@media (max-width: 900px) {
+		.modules-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 600px) {
+		.modules-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

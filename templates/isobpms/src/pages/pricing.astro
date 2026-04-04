@@ -1,0 +1,42 @@
+---
+import { getEmDashEntry, getEmDashCollection } from "emdash";
+import Base from "../layouts/Base.astro";
+import Hero from "../components/blocks/Hero.astro";
+import Pricing from "../components/blocks/Pricing.astro";
+import FAQ from "../components/blocks/FAQ.astro";
+import { t } from "../i18n/ui";
+
+const locale = Astro.currentLocale || "en";
+const { entry: page, cacheHint } = await getEmDashEntry("pages", "pricing");
+const { entries: plans } = await getEmDashCollection("pricing_plans", { orderBy: { sort_order: "asc" } });
+const { entries: faqItems } = await getEmDashCollection("faq_items", { where: { page: "pricing" }, orderBy: { sort_order: "asc" } });
+
+try {
+	Astro.cache.set(cacheHint);
+} catch {}
+---
+
+<Base title={t(locale, "nav.pricing")}>
+	<Hero node={{
+		headline: page?.data.hero_headline || "Simple, transparent pricing",
+		subheadline: page?.data.hero_subheadline,
+		centered: true,
+	}} />
+
+	<Pricing node={{
+		plans: plans.map(e => ({
+			name: e.data.name,
+			price: e.data.price,
+			period: e.data.period || "",
+			description: e.data.description || "",
+			features: (e.data.features_list || "").split("\n").filter((f: string) => f.trim()),
+			cta: { label: e.data.cta_label || "Get Started", url: e.data.cta_url || "#" },
+			highlighted: e.data.highlighted || false,
+		})),
+	}} />
+
+	<FAQ node={{
+		headline: "Pricing FAQ",
+		items: faqItems.map(e => ({ question: e.data.question, answer: e.data.answer })),
+	}} />
+</Base>

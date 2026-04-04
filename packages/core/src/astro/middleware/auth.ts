@@ -597,9 +597,7 @@ async function handlePasskeyAuth(
 					{ status: 401, headers },
 				);
 			}
-			const loginUrl = new URL("/_emdash/admin/login", url.origin);
-			loginUrl.searchParams.set("redirect", url.pathname);
-			return context.redirect(loginUrl.toString());
+			return context.redirect(`/_emdash/admin/login?redirect=${encodeURIComponent(url.pathname)}`);
 		}
 
 		// Get full user from database
@@ -624,9 +622,7 @@ async function handlePasskeyAuth(
 			if (isApiRoute) {
 				return apiError("ACCOUNT_DISABLED", "Account disabled", 403);
 			}
-			const loginUrl = new URL("/_emdash/admin/login", url.origin);
-			loginUrl.searchParams.set("error", "account_disabled");
-			return context.redirect(loginUrl.toString());
+			return context.redirect("/_emdash/admin/login?error=account_disabled");
 		}
 
 		// Set user in locals for use by routes

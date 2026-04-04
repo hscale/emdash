@@ -10,7 +10,7 @@
  */
 
 import { autoUpdate, flip, offset, shift, useFloating } from "@floating-ui/react";
-import { Extension, type JSONContent, type Range } from "@tiptap/core";
+import { Extension, Node as TiptapNode, type JSONContent, type Range } from "@tiptap/core";
 import Focus from "@tiptap/extension-focus";
 import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
@@ -200,12 +200,23 @@ function convertPMNode(node: PMNode): PTBlock | PTBlock[] | null {
 		}
 		case "horizontalRule":
 			return { _type: "break", _key: k(), style: "lineBreak" };
-		case "pluginBlock":
+		case "pluginBlock": {
+			const blockType = attrStr(node.attrs, "blockType") || "embed";
+			const blockId = attrStr(node.attrs, "id");
+			const blockData =
+				node.attrs && typeof node.attrs.data === "object" && node.attrs.data !== null
+					? (node.attrs.data as Record<string, unknown>)
+					: {};
+			// Preserve original _key from block data to avoid false "unsaved changes"
+			const originalKey = typeof blockData._key === "string" ? blockData._key : k();
+			const { _key: _, ...restData } = blockData;
 			return {
-				_type: attrStr(node.attrs, "blockType") || "embed",
-				_key: k(),
-				id: attrStr(node.attrs, "id"),
+				_type: blockType,
+				_key: originalKey,
+				...(blockId ? { id: blockId } : {}),
+				...restData,
 			};
+		}
 		default:
 			return null;
 	}
@@ -408,18 +419,26 @@ function convertPTBlock(block: PTBlock): JSONContent | null {
 			},
 		};
 	}
-	// Unknown block types — treat as plugin blocks if they have an id
-	const embedBlock = block as { _type: string; url?: string; id?: string };
-	if (embedBlock.id || embedBlock.url) {
+	// Unknown block types — treat as plugin blocks if they have an id, url, or field data
+	const { _type, _key, ...rest } = block as Record<string, unknown>;
+	const embedId = (rest as Record<string, string>).id || (rest as Record<string, string>).url;
+	const fieldData = Object.fromEntries(
+		Object.entries(rest).filter(([k]) => !k.startsWith("_")),
+	);
+	const hasFieldData = Object.keys(fieldData).length > 0;
+	if (embedId || hasFieldData) {
+		// Preserve _key in data for lossless roundtrip (prevents false "unsaved changes")
+		const dataWithKey = hasFieldData ? { _key, ...fieldData } : undefined;
 		return {
 			type: "pluginBlock",
 			attrs: {
 				blockType: block._type,
-				id: embedBlock.id || embedBlock.url || "",
+				id: embedId || "",
+				data: dataWithKey,
 			},
 		};
 	}
-	// Truly unknown — render as code-marked text
+	// Truly unknown with no data — render as code-marked text
 	return {
 		type: "paragraph",
 		content: [{ type: "text", text: `[${block._type}]`, marks: [{ type: "code" }] }],
@@ -1654,6 +1673,102 @@ export function InlinePortableTextEditor({
 		}
 	}, [collection, entryId, field, getBlocks]);
 
+	// Plugin block node — renders custom block types as read-only atom nodes
+	const pluginBlockNode = React.useMemo(
+		() =>
+			TiptapNode.create({
+				name: "pluginBlock",
+				group: "block",
+				atom: true,
+				draggable: false,
+				selectable: true,
+				addAttributes() {
+					return {
+						blockType: { default: "" },
+						id: { default: "" },
+						data: { default: null },
+					};
+				},
+				parseHTML() {
+					return [{ tag: 'div[data-plugin-block]' }];
+				},
+				renderHTML({ node }) {
+					const blockType = (node.attrs.blockType as string) || "unknown";
+					const label = blockType.includes(".")
+						? blockType.split(".").pop()!
+						: blockType;
+					const displayLabel = label.charAt(0).toUpperCase() + label.slice(1);
+					return [
+						"div",
+						{
+							"data-plugin-block": blockType,
+							contenteditable: "false",
+							style:
+								"display:flex;align-items:center;gap:8px;padding:12px 16px;margin:4px 0;border:1px solid #e2e8f0;border-radius:8px;background:white;color:#475569;font-size:13px;cursor:pointer;user-select:none;transition:border-color 0.15s,box-shadow 0.15s",
+							onmouseenter: "this.style.borderColor='#3b82f6';this.style.boxShadow='0 0 0 2px rgba(59,130,246,0.15)'",
+							onmouseleave: "this.style.borderColor='#e2e8f0';this.style.boxShadow='none'",
+						},
+						[
+							"span",
+							{
+								style:
+									"display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:6px;font-size:12px;color:white",
+							},
+							"⬡",
+						],
+						[
+							"span",
+							{ style: "font-weight:600;color:#1e293b" },
+							displayLabel,
+						],
+						[
+							"span",
+							{
+								style: "margin-left:auto;font-size:11px;color:#3b82f6;font-weight:500",
+							},
+							"Click to edit in admin →",
+						],
+					];
+				},
+				addNodeView() {
+					return ({ node, HTMLAttributes }) => {
+						const dom = document.createElement("div");
+						Object.entries(HTMLAttributes).forEach(([key, value]) => {
+							if (key === "style") dom.setAttribute("style", value as string);
+							else if (typeof value === "string") dom.setAttribute(key, value);
+						});
+						const blockType = (node.attrs.blockType as string) || "unknown";
+						const label = blockType.includes(".")
+							? blockType.split(".").pop()!
+							: blockType;
+						const displayLabel = label.charAt(0).toUpperCase() + label.slice(1);
+						dom.innerHTML = `
+							<span style="display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:6px;font-size:12px;color:white">⬡</span>
+							<span style="font-weight:600;color:#1e293b">${displayLabel}</span>
+							<span style="margin-left:auto;font-size:11px;color:#3b82f6;font-weight:500">Click to edit in admin →</span>
+						`;
+						dom.style.cssText = "display:flex;align-items:center;gap:8px;padding:12px 16px;margin:4px 0;border:1px solid #e2e8f0;border-radius:8px;background:white;color:#475569;font-size:13px;cursor:pointer;user-select:none;transition:border-color 0.15s,box-shadow 0.15s";
+						dom.addEventListener("mouseenter", () => {
+							dom.style.borderColor = "#3b82f6";
+							dom.style.boxShadow = "0 0 0 2px rgba(59,130,246,0.15)";
+						});
+						dom.addEventListener("mouseleave", () => {
+							dom.style.borderColor = "#e2e8f0";
+							dom.style.boxShadow = "none";
+						});
+						dom.addEventListener("click", () => {
+							// Navigate to admin editor for this content
+							const path = window.location.pathname;
+							const adminUrl = `/_emdash/admin/content/pages`;
+							window.open(adminUrl, "_blank");
+						});
+						return { dom };
+					};
+				},
+			}),
+		[],
+	);
+
 	// Create slash commands extension once — uses refs to avoid re-render loop
 	const slashCommandsExtension = React.useMemo(
 		() =>
@@ -1702,6 +1817,7 @@ export function InlinePortableTextEditor({
 				mode: "all",
 			}),
 			Typography,
+			pluginBlockNode,
 			slashCommandsExtension,
 		],
 		content: initialContent,

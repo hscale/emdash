@@ -1,0 +1,802 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "ISO BPMS Marketing",
+		"description": "AI-Powered Business Process Management System marketing site",
+		"author": "NetADX AI"
+	},
+
+	"settings": {
+		"title": "ISO BPMS",
+		"tagline": "AI-Powered Business Process Management"
+	},
+
+	"collections": [
+		{
+			"slug": "pages",
+			"label": "Pages",
+			"labelSingular": "Page",
+			"supports": ["drafts", "revisions", "seo"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "hero_headline",
+					"label": "Hero Headline",
+					"type": "string"
+				},
+				{
+					"slug": "hero_subheadline",
+					"label": "Hero Subheadline",
+					"type": "text"
+				},
+				{
+					"slug": "hero_cta_label",
+					"label": "Hero CTA Label",
+					"type": "string"
+				},
+				{
+					"slug": "hero_cta_url",
+					"label": "Hero CTA URL",
+					"type": "string"
+				},
+				{
+					"slug": "hero_secondary_label",
+					"label": "Hero Secondary CTA Label",
+					"type": "string"
+				},
+				{
+					"slug": "hero_secondary_url",
+					"label": "Hero Secondary CTA URL",
+					"type": "string"
+				},
+				{
+					"slug": "section_headline",
+					"label": "Section Headline",
+					"type": "string"
+				},
+				{
+					"slug": "section_subheadline",
+					"label": "Section Subheadline",
+					"type": "text"
+				}
+			]
+		},
+		{
+			"slug": "ai_capabilities",
+			"label": "AI Capabilities",
+			"labelSingular": "AI Capability",
+			"supports": ["drafts"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "text"
+				},
+				{
+					"slug": "icon",
+					"label": "Icon",
+					"type": "string"
+				},
+				{
+					"slug": "sort_order",
+					"label": "Sort Order",
+					"type": "integer"
+				}
+			]
+		},
+		{
+			"slug": "platform_features",
+			"label": "Platform Features",
+			"labelSingular": "Platform Feature",
+			"supports": ["drafts"],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Title",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "text"
+				},
+				{
+					"slug": "icon",
+					"label": "Icon",
+					"type": "string"
+				},
+				{
+					"slug": "sort_order",
+					"label": "Sort Order",
+					"type": "integer"
+				}
+			]
+		},
+		{
+			"slug": "modules",
+			"label": "Modules",
+			"labelSingular": "Module",
+			"supports": ["drafts"],
+			"fields": [
+				{
+					"slug": "name",
+					"label": "Name",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "text"
+				},
+				{
+					"slug": "object_count",
+					"label": "Object Count",
+					"type": "integer"
+				},
+				{
+					"slug": "icon",
+					"label": "Icon",
+					"type": "string"
+				},
+				{
+					"slug": "sort_order",
+					"label": "Sort Order",
+					"type": "integer"
+				}
+			]
+		},
+		{
+			"slug": "testimonials",
+			"label": "Testimonials",
+			"labelSingular": "Testimonial",
+			"supports": ["drafts"],
+			"fields": [
+				{
+					"slug": "quote",
+					"label": "Quote",
+					"type": "text",
+					"required": true
+				},
+				{
+					"slug": "author",
+					"label": "Author",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "role",
+					"label": "Role",
+					"type": "string"
+				},
+				{
+					"slug": "company",
+					"label": "Company",
+					"type": "string"
+				},
+				{
+					"slug": "initials",
+					"label": "Initials",
+					"type": "string"
+				},
+				{
+					"slug": "sort_order",
+					"label": "Sort Order",
+					"type": "integer"
+				}
+			]
+		},
+		{
+			"slug": "faq_items",
+			"label": "FAQ Items",
+			"labelSingular": "FAQ Item",
+			"supports": ["drafts"],
+			"fields": [
+				{
+					"slug": "question",
+					"label": "Question",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "answer",
+					"label": "Answer",
+					"type": "text",
+					"required": true
+				},
+				{
+					"slug": "sort_order",
+					"label": "Sort Order",
+					"type": "integer"
+				},
+				{
+					"slug": "page",
+					"label": "Page",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"slug": "pricing_plans",
+			"label": "Pricing Plans",
+			"labelSingular": "Pricing Plan",
+			"supports": ["drafts"],
+			"fields": [
+				{
+					"slug": "name",
+					"label": "Name",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "price",
+					"label": "Price",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "period",
+					"label": "Period",
+					"type": "string"
+				},
+				{
+					"slug": "description",
+					"label": "Description",
+					"type": "text"
+				},
+				{
+					"slug": "features_list",
+					"label": "Features (one per line)",
+					"type": "text"
+				},
+				{
+					"slug": "cta_label",
+					"label": "CTA Label",
+					"type": "string"
+				},
+				{
+					"slug": "cta_url",
+					"label": "CTA URL",
+					"type": "string"
+				},
+				{
+					"slug": "highlighted",
+					"label": "Highlighted",
+					"type": "boolean"
+				},
+				{
+					"slug": "sort_order",
+					"label": "Sort Order",
+					"type": "integer"
+				}
+			]
+		}
+	],
+
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Primary Navigation",
+			"items": [
+				{ "type": "custom", "label": "AI Core", "url": "/#ai-core" },
+				{ "type": "custom", "label": "Features", "url": "/#features" },
+				{ "type": "custom", "label": "Modules", "url": "/#modules" },
+				{ "type": "custom", "label": "Pricing", "url": "/pricing" },
+				{ "type": "custom", "label": "Contact", "url": "/contact" }
+			]
+		},
+		{
+			"name": "footer-product",
+			"label": "Footer - Product",
+			"items": [
+				{ "type": "custom", "label": "AI Core", "url": "/#ai-core" },
+				{ "type": "custom", "label": "Features", "url": "/#features" },
+				{ "type": "custom", "label": "Modules", "url": "/#modules" },
+				{ "type": "custom", "label": "Pricing", "url": "/pricing" }
+			]
+		},
+		{
+			"name": "footer-platform",
+			"label": "Footer - Platform",
+			"items": [
+				{ "type": "custom", "label": "Launch App", "url": "https://app.isobpms.com" },
+				{ "type": "custom", "label": "API Status", "url": "/status" },
+				{ "type": "custom", "label": "API Explorer", "url": "/api" }
+			]
+		},
+		{
+			"name": "footer-company",
+			"label": "Footer - Company",
+			"items": [
+				{ "type": "custom", "label": "Contact", "url": "/contact" },
+				{ "type": "custom", "label": "GitHub", "url": "https://github.com/netadx1ai/isobpms" }
+			]
+		}
+	],
+
+	"content": {
+		"pages": [
+			{
+				"id": "home",
+				"slug": "home",
+				"status": "published",
+				"data": {
+					"title": "Home",
+					"hero_headline": "AI-Powered Processes, Zero Code",
+					"hero_subheadline": "Describe what you need in plain language. Our AI builds the objects, fields, workflows, and automations \u2014 all as runtime metadata. Your system evolves as fast as your business.",
+					"hero_cta_label": "Start Free with AI",
+					"hero_cta_url": "https://app.isobpms.com/signup",
+					"hero_secondary_label": "Watch AI Demo",
+					"hero_secondary_url": "/#ai-core",
+					"section_headline": "AI is not a feature. It's the foundation.",
+					"section_subheadline": "Every layer of ISO BPMS is AI-native \u2014 from data modeling to workflow execution. The AI doesn't just assist, it architects."
+				}
+			},
+			{
+				"id": "pricing",
+				"slug": "pricing",
+				"status": "published",
+				"data": {
+					"title": "Pricing",
+					"hero_headline": "Simple, transparent pricing",
+					"hero_subheadline": "Start free. Scale as your processes grow. No hidden fees."
+				}
+			},
+			{
+				"id": "contact",
+				"slug": "contact",
+				"status": "published",
+				"data": {
+					"title": "Contact",
+					"hero_headline": "Get in touch",
+					"hero_subheadline": "Have questions? Want a demo? We'd love to hear from you."
+				}
+			}
+		],
+
+		"ai_capabilities": [
+			{
+				"id": "ai-workflow-builder",
+				"slug": "ai-workflow-builder",
+				"status": "published",
+				"data": {
+					"title": "AI Workflow Builder",
+					"description": "Describe a business process in natural language. The AI generates the complete workflow \u2014 triggers, conditions, approvals, actions \u2014 ready to deploy.",
+					"icon": "flow-arrow",
+					"sort_order": 10
+				}
+			},
+			{
+				"id": "ai-data-architect",
+				"slug": "ai-data-architect",
+				"status": "published",
+				"data": {
+					"title": "AI Data Architect",
+					"description": "Say 'I need to track invoices with line items and approvals' \u2014 AI creates the objects, fields, relations, and validation rules instantly.",
+					"icon": "database",
+					"sort_order": 20
+				}
+			},
+			{
+				"id": "ai-process-copilot",
+				"slug": "ai-process-copilot",
+				"status": "published",
+				"data": {
+					"title": "AI Process Copilot",
+					"description": "Chat with your BPM system. Ask 'Show me overdue approvals' or 'What's blocking the Q2 pipeline?' \u2014 get answers and actions, not dashboards.",
+					"icon": "chat-circle",
+					"sort_order": 30
+				}
+			},
+			{
+				"id": "ai-automation-rules",
+				"slug": "ai-automation-rules",
+				"status": "published",
+				"data": {
+					"title": "AI Automation Rules",
+					"description": "Describe conditions in English: 'When a deal exceeds $50K, require VP approval and notify finance.' AI generates the automation rules and wires them up.",
+					"icon": "gear",
+					"sort_order": 40
+				}
+			},
+			{
+				"id": "ai-process-insights",
+				"slug": "ai-process-insights",
+				"status": "published",
+				"data": {
+					"title": "AI Process Insights",
+					"description": "AI continuously analyzes your workflows \u2014 identifies bottlenecks, suggests optimizations, predicts SLA breaches before they happen.",
+					"icon": "chart-line",
+					"sort_order": 50
+				}
+			},
+			{
+				"id": "ai-multilingual",
+				"slug": "ai-multilingual",
+				"status": "published",
+				"data": {
+					"title": "AI Multilingual",
+					"description": "Interface and content in 5 languages. AI auto-translates field labels, notification templates, and workflow descriptions across your global team.",
+					"icon": "translate",
+					"sort_order": 60
+				}
+			}
+		],
+
+		"platform_features": [
+			{
+				"id": "dynamic-data-model",
+				"slug": "dynamic-data-model",
+				"status": "published",
+				"data": {
+					"title": "Dynamic Data Model",
+					"description": "Create objects, fields, and relations on the fly. No migrations \u2014 tables and GraphQL schemas generated automatically from metadata.",
+					"icon": "cube",
+					"sort_order": 10
+				}
+			},
+			{
+				"id": "visual-workflow-builder",
+				"slug": "visual-workflow-builder",
+				"status": "published",
+				"data": {
+					"title": "Visual Workflow Builder",
+					"description": "Design processes with 30+ node types: triggers, conditions, approvals, parallel branches. Powered by DuraDX engine.",
+					"icon": "git-branch",
+					"sort_order": 20
+				}
+			},
+			{
+				"id": "automation-engine",
+				"slug": "automation-engine",
+				"status": "published",
+				"data": {
+					"title": "Automation Engine",
+					"description": "Rules fire on entity events. Conditions evaluate at runtime, actions execute automatically. Pure event-driven.",
+					"icon": "lightning",
+					"sort_order": 30
+				}
+			},
+			{
+				"id": "module-system",
+				"slug": "module-system",
+				"status": "published",
+				"data": {
+					"title": "Module System",
+					"description": "Install pre-built modules from JSON manifests. Each brings objects, fields, relations, and workflow nodes.",
+					"icon": "package",
+					"sort_order": 40
+				}
+			},
+			{
+				"id": "multi-tenant-workspaces",
+				"slug": "multi-tenant-workspaces",
+				"status": "published",
+				"data": {
+					"title": "Multi-Tenant Workspaces",
+					"description": "Each workspace gets its own PostgreSQL schema. Complete data isolation with shared metadata infrastructure.",
+					"icon": "buildings",
+					"sort_order": 50
+				}
+			},
+			{
+				"id": "graphql-api",
+				"slug": "graphql-api",
+				"status": "published",
+				"data": {
+					"title": "GraphQL API",
+					"description": "Auto-generated schema from metadata. Full CRUD, filtering, sorting, pagination \u2014 without writing resolvers.",
+					"icon": "plugs-connected",
+					"sort_order": 60
+				}
+			}
+		],
+
+		"modules": [
+			{
+				"id": "crm",
+				"slug": "crm",
+				"status": "published",
+				"data": {
+					"name": "CRM",
+					"description": "Companies, people, opportunities, tasks, notes with pipeline management",
+					"object_count": 5,
+					"icon": "users",
+					"sort_order": 10
+				}
+			},
+			{
+				"id": "hrm",
+				"slug": "hrm",
+				"status": "published",
+				"data": {
+					"name": "HRM",
+					"description": "Departments, employees, leave requests, attendance, payroll",
+					"object_count": 5,
+					"icon": "identification-card",
+					"sort_order": 20
+				}
+			},
+			{
+				"id": "project",
+				"slug": "project",
+				"status": "published",
+				"data": {
+					"name": "Project",
+					"description": "Projects, phases, milestones, work packages, time entries, risks",
+					"object_count": 9,
+					"icon": "kanban",
+					"sort_order": 30
+				}
+			},
+			{
+				"id": "finance",
+				"slug": "finance",
+				"status": "published",
+				"data": {
+					"name": "Finance",
+					"description": "Accounts, invoices, payments, expenses, budgets",
+					"object_count": 5,
+					"icon": "currency-dollar",
+					"sort_order": 40
+				}
+			},
+			{
+				"id": "inventory",
+				"slug": "inventory",
+				"status": "published",
+				"data": {
+					"name": "Inventory",
+					"description": "Suppliers, warehouses, products, stock movements, purchase orders",
+					"object_count": 5,
+					"icon": "warehouse",
+					"sort_order": 50
+				}
+			},
+			{
+				"id": "document",
+				"slug": "document",
+				"status": "published",
+				"data": {
+					"name": "Document",
+					"description": "Folders, documents, approvals, templates with version control",
+					"object_count": 4,
+					"icon": "file-text",
+					"sort_order": 60
+				}
+			},
+			{
+				"id": "helpdesk",
+				"slug": "helpdesk",
+				"status": "published",
+				"data": {
+					"name": "Helpdesk",
+					"description": "SLAs, tickets, knowledge base, customer feedback",
+					"object_count": 4,
+					"icon": "headset",
+					"sort_order": 70
+				}
+			},
+			{
+				"id": "procurement",
+				"slug": "procurement",
+				"status": "published",
+				"data": {
+					"name": "Procurement",
+					"description": "Vendors, purchase requests, contracts, RFQs",
+					"object_count": 4,
+					"icon": "shopping-cart",
+					"sort_order": 80
+				}
+			},
+			{
+				"id": "marketing",
+				"slug": "marketing",
+				"status": "published",
+				"data": {
+					"name": "Marketing",
+					"description": "Campaigns, leads, email templates, audiences, conversions",
+					"object_count": 5,
+					"icon": "megaphone",
+					"sort_order": 90
+				}
+			}
+		],
+
+		"testimonials": [
+			{
+				"id": "testimonial-minh",
+				"slug": "testimonial-minh",
+				"status": "published",
+				"data": {
+					"quote": "The AI built our entire approval workflow from a single sentence. We went from idea to running process in 5 minutes.",
+					"author": "Minh Tran",
+					"role": "Operations Director",
+					"company": "TechVN Solutions",
+					"initials": "MT",
+					"sort_order": 10
+				}
+			},
+			{
+				"id": "testimonial-sarah",
+				"slug": "testimonial-sarah",
+				"status": "published",
+				"data": {
+					"quote": "We described our CRM needs in plain English and ISO BPMS created 12 custom objects with all the relations. Mind-blowing.",
+					"author": "Sarah Chen",
+					"role": "Process Engineer",
+					"company": "Pacific Digital",
+					"initials": "SC",
+					"sort_order": 20
+				}
+			},
+			{
+				"id": "testimonial-david",
+				"slug": "testimonial-david",
+				"status": "published",
+				"data": {
+					"quote": "Having AI + 9 installable modules means we can spin up a complete department system in an afternoon.",
+					"author": "David Nguyen",
+					"role": "CTO",
+					"company": "NetADX AI",
+					"initials": "DN",
+					"sort_order": 30
+				}
+			}
+		],
+
+		"faq_items": [
+			{
+				"id": "faq-how-ai-works",
+				"slug": "faq-how-ai-works",
+				"status": "published",
+				"data": {
+					"question": "How does the AI work in ISO BPMS?",
+					"answer": "The AI is built into every layer of the platform. You describe what you need in natural language \u2014 objects, fields, workflows, automations \u2014 and the AI generates the complete metadata configuration. It uses your existing schema context to make intelligent suggestions and can create entire modules from a single description.",
+					"sort_order": 10,
+					"page": "home"
+				}
+			},
+			{
+				"id": "faq-metadata-driven",
+				"slug": "faq-metadata-driven",
+				"status": "published",
+				"data": {
+					"question": "What does 'metadata-driven' mean?",
+					"answer": "Instead of hardcoding business entities in source code, everything in ISO BPMS is defined as metadata \u2014 data that describes your data. Objects, fields, relations, workflows, and automations are all runtime configurations. This means you can modify your entire system without code changes, deployments, or migrations.",
+					"sort_order": 20,
+					"page": "home"
+				}
+			},
+			{
+				"id": "faq-ai-modules",
+				"slug": "faq-ai-modules",
+				"status": "published",
+				"data": {
+					"question": "Can the AI create entire modules?",
+					"answer": "Yes. Describe a business domain like 'I need a procurement system with vendors, purchase orders, approvals, and budget tracking' and the AI will generate all the objects, fields, relations, workflow triggers, and automation rules as a complete module manifest.",
+					"sort_order": 30,
+					"page": "home"
+				}
+			},
+			{
+				"id": "faq-languages",
+				"slug": "faq-languages",
+				"status": "published",
+				"data": {
+					"question": "What languages are supported?",
+					"answer": "ISO BPMS supports English and Vietnamese out of the box, with AI-powered translation for field labels, notification templates, and workflow descriptions. The platform architecture supports adding additional languages.",
+					"sort_order": 40,
+					"page": "home"
+				}
+			},
+			{
+				"id": "faq-free-tier",
+				"slug": "faq-free-tier",
+				"status": "published",
+				"data": {
+					"question": "Is there a free tier?",
+					"answer": "Yes. The Starter plan is free and includes 1 workspace, 3 modules, and up to 1,000 records. It's perfect for trying out the platform and building your first processes.",
+					"sort_order": 50,
+					"page": "home"
+				}
+			},
+			{
+				"id": "faq-change-plans",
+				"slug": "faq-change-plans",
+				"status": "published",
+				"data": {
+					"question": "Can I change plans later?",
+					"answer": "Yes, you can upgrade or downgrade at any time. Changes take effect immediately and we'll prorate your billing.",
+					"sort_order": 10,
+					"page": "pricing"
+				}
+			},
+			{
+				"id": "faq-workspace-definition",
+				"slug": "faq-workspace-definition",
+				"status": "published",
+				"data": {
+					"question": "What counts as a workspace?",
+					"answer": "A workspace is an isolated environment with its own database schema, modules, and users. Teams typically use one workspace per department or business unit.",
+					"sort_order": 20,
+					"page": "pricing"
+				}
+			},
+			{
+				"id": "faq-annual-discount",
+				"slug": "faq-annual-discount",
+				"status": "published",
+				"data": {
+					"question": "Is there a discount for annual billing?",
+					"answer": "Yes, annual plans receive a 20% discount compared to monthly billing.",
+					"sort_order": 30,
+					"page": "pricing"
+				}
+			}
+		],
+
+		"pricing_plans": [
+			{
+				"id": "plan-starter",
+				"slug": "plan-starter",
+				"status": "published",
+				"data": {
+					"name": "Starter",
+					"price": "$0",
+					"period": "/month",
+					"description": "Perfect for trying things out",
+					"features_list": "1 workspace\n3 modules\nUp to 1,000 records\nAI object builder\nCommunity support",
+					"cta_label": "Get Started Free",
+					"cta_url": "https://app.isobpms.com/signup",
+					"highlighted": false,
+					"sort_order": 10
+				}
+			},
+			{
+				"id": "plan-pro",
+				"slug": "plan-pro",
+				"status": "published",
+				"data": {
+					"name": "Pro",
+					"price": "$49",
+					"period": "/workspace/month",
+					"description": "For growing teams",
+					"features_list": "Unlimited workspaces\nAll 9 modules\nUnlimited records\nAI workflow builder\nAI process copilot\nVisual workflow designer\nPriority support\nAPI access",
+					"cta_label": "Start Free Trial",
+					"cta_url": "https://app.isobpms.com/signup?plan=pro",
+					"highlighted": true,
+					"sort_order": 20
+				}
+			},
+			{
+				"id": "plan-enterprise",
+				"slug": "plan-enterprise",
+				"status": "published",
+				"data": {
+					"name": "Enterprise",
+					"price": "Custom",
+					"description": "For large organizations",
+					"features_list": "Everything in Pro\nSelf-hosted option\nCustom modules\nAI process insights\nSLA guarantee\nDedicated support\nSSO & audit logs",
+					"cta_label": "Contact Sales",
+					"cta_url": "/contact",
+					"highlighted": false,
+					"sort_order": 30
+				}
+			}
+		]
+	}
+}

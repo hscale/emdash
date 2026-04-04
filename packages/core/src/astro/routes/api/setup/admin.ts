@@ -56,7 +56,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		// Get passkey config
 		const url = new URL(request.url);
 		const siteName = (await options.get<string>("emdash:site_title")) ?? undefined;
-		const passkeyConfig = getPasskeyConfig(url, siteName);
+		const passkeyConfig = getPasskeyConfig(url, siteName, request);
 
 		// Generate registration options
 		const challengeStore = createChallengeStore(emdash.db);

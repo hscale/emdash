@@ -1,0 +1,24 @@
+---
+import Base from "../layouts/Base.astro";
+import { t, localePath, type Locale } from "../i18n/ui";
+
+const locale = (Astro.currentLocale || "en") as Locale;
+---
+
+<Base title={t(locale, "404.title")}>
+	<section class="not-found">
+		<h1 class="not-found-code">{t(locale, "404.code")}</h1>
+		<p class="not-found-message">{t(locale, "404.message")}</p>
+		<div class="not-found-actions">
+			<a href={localePath(locale, "/")} class="btn btn-primary btn-lg">{t(locale, "404.goHome")}</a>
+			<a href={localePath(locale, "/contact")} class="btn btn-secondary btn-lg">{t(locale, "404.contactUs")}</a>
+		</div>
+	</section>
+</Base>
+
+<style>
+	.not-found { text-align: center; padding: var(--spacing-5xl) var(--spacing-lg); max-width: var(--max-width); margin: 0 auto; }
+	.not-found-code { font-size: 8rem; font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: var(--color-brand-navy); margin-bottom: var(--spacing-md); }
+	.not-found-message { font-size: var(--font-size-xl); color: var(--color-muted); margin-bottom: var(--spacing-2xl); }
+	.not-found-actions { display: flex; gap: var(--spacing-md); justify-content: center; }
+</style>

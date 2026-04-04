@@ -1,0 +1,59 @@
+---
+import { getEmDashEntry, getEmDashCollection } from "emdash";
+import Base from "../../layouts/Base.astro";
+import Hero from "../../components/blocks/Hero.astro";
+import AiCore from "../../components/blocks/AiCore.astro";
+import Features from "../../components/blocks/Features.astro";
+import Modules from "../../components/blocks/Modules.astro";
+import Testimonials from "../../components/blocks/Testimonials.astro";
+import FAQ from "../../components/blocks/FAQ.astro";
+
+const locale = Astro.currentLocale || "en";
+const { entry: page, cacheHint } = await getEmDashEntry("pages", "home", { locale });
+const { entries: aiCaps } = await getEmDashCollection("ai_capabilities", { locale, orderBy: { sort_order: "asc" } });
+const { entries: features } = await getEmDashCollection("platform_features", { locale, orderBy: { sort_order: "asc" } });
+const { entries: modules } = await getEmDashCollection("modules", { locale, orderBy: { sort_order: "asc" } });
+const { entries: testimonials } = await getEmDashCollection("testimonials", { locale, orderBy: { sort_order: "asc" } });
+const { entries: faqItems } = await getEmDashCollection("faq_items", { locale, where: { page: "home" }, orderBy: { sort_order: "asc" } });
+
+try {
+	Astro.cache.set(cacheHint);
+} catch {}
+---
+
+<Base>
+	<Hero node={{
+		headline: page?.data.hero_headline || "AI-Powered Processes, Zero Code",
+		subheadline: page?.data.hero_subheadline,
+		primaryCta: page?.data.hero_cta_label ? { label: page.data.hero_cta_label, url: page.data.hero_cta_url || "#" } : undefined,
+		secondaryCta: page?.data.hero_secondary_label ? { label: page.data.hero_secondary_label, url: page.data.hero_secondary_url || "#" } : undefined,
+	}} />
+
+	<AiCore node={{
+		headline: page?.data.section_headline || "AI is not a feature. It's the foundation.",
+		subheadline: page?.data.section_subheadline,
+		capabilities: aiCaps.map(e => ({ title: e.data.title, description: e.data.description || "", icon: e.data.icon || "sparkle" })),
+	}} />
+
+	<Features node={{
+		headline: "Everything metadata-driven",
+		subheadline: "A complete BPM platform where every aspect \u2014 from data models to workflow automation \u2014 is defined dynamically.",
+		features: features.map(e => ({ title: e.data.title, description: e.data.description || "", icon: e.data.icon || "cube" })),
+	}} />
+
+	<Modules node={{
+		headline: "9 modules, ready to install",
+		subheadline: "Each module is a JSON manifest that creates real database tables, fields, and workflow nodes on install.",
+		modules: modules.map(e => ({ name: e.data.name, description: e.data.description || "", objectCount: e.data.object_count || 0, icon: e.data.icon || "package" })),
+	}} />
+
+	<Testimonials node={{
+		headline: "Built for teams that move fast",
+		testimonials: testimonials.map(e => ({ quote: e.data.quote, author: e.data.author, role: e.data.role || "", company: e.data.company || "", initials: e.data.initials || "" })),
+	}} />
+
+	<FAQ node={{
+		headline: "Frequently asked questions",
+		items: faqItems.map(e => ({ question: e.data.question, answer: e.data.answer })),
+	}} />
+</Base>
