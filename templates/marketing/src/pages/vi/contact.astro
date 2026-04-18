@@ -1,19 +1,14 @@
 ---
 import { getEmDashEntry } from "emdash";
-import Base from "../layouts/Base.astro";
-import MarketingBlocks from "../components/MarketingBlocks.astro";
+import Base from "../../layouts/Base.astro";
+import MarketingBlocks from "../../components/MarketingBlocks.astro";
 
-const { entry: page, cacheHint } = await getEmDashEntry("pages", "contact");
+const { entry: page, cacheHint } = await getEmDashEntry("pages", "contact", { locale: "vi" });
 
 try {
 	Astro.cache.set(cacheHint);
 } catch {}
 
-// Handle form submission
-// NOTE: This is demo code. For production, add:
-// - CSRF token validation
-// - Rate limiting (e.g., via Cloudflare or middleware)
-// - Actual email sending or webhook integration
 let formStatus: "idle" | "success" | "error" = "idle";
 let formMessage = "";
 
@@ -27,12 +22,11 @@ if (Astro.request.method === "POST") {
 
 		if (!name || !email || !message) {
 			formStatus = "error";
-			formMessage = "Please fill in all required fields.";
+			formMessage = "Vui lòng điền đầy đủ các trường bắt buộc.";
 		} else if (!email.includes("@")) {
 			formStatus = "error";
-			formMessage = "Please enter a valid email address.";
+			formMessage = "Vui lòng nhập địa chỉ email hợp lệ.";
 		} else {
-			// TODO: Replace with actual email/webhook integration
 			console.log("Contact form submission:", {
 				name,
 				email,
@@ -41,11 +35,11 @@ if (Astro.request.method === "POST") {
 			});
 			formStatus = "success";
 			formMessage =
-				"Thanks for reaching out! We'll get back to you within 24 hours.";
+				"Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi trong vòng 24 giờ.";
 		}
 	} catch {
 		formStatus = "error";
-		formMessage = "Something went wrong. Please try again.";
+		formMessage = "Đã xảy ra lỗi. Vui lòng thử lại.";
 	}
 }
 
@@ -53,8 +47,8 @@ const pageContent = page?.data.content;
 ---
 
 <Base
-	title="Contact"
-	description="Have questions? Want a demo? We'd love to hear from you."
+	title="Liên hệ"
+	description="Bạn có câu hỏi? Muốn xem demo? Chúng tôi rất muốn nghe từ bạn."
 >
 	{pageContent && <MarketingBlocks value={pageContent} />}
 
@@ -62,8 +56,8 @@ const pageContent = page?.data.content;
 		<div class="container">
 			<div class="contact-grid">
 				<div class="contact-info">
-					<h2>Talk to our team</h2>
-					<p>Fill out the form and we'll be in touch within 24 hours.</p>
+					<h2>Liên hệ với đội ngũ của chúng tôi</h2>
+					<p>Điền vào biểu mẫu và chúng tôi sẽ liên hệ lại trong vòng 24 giờ.</p>
 
 					<div class="contact-methods">
 						<div class="contact-method">
@@ -77,20 +71,20 @@ const pageContent = page?.data.content;
 						</div>
 						<div class="contact-method">
 							<div class="contact-icon">
-								<i class="ph ph-phone" aria-hidden="true"></i>
+								<i class="ph ph-lifebuoy" aria-hidden="true"></i>
 							</div>
 							<div class="contact-method-content">
-								<h4>Phone</h4>
-								<a href="tel:+84965134969">0965 134 969</a>
+								<h4>Hỗ trợ</h4>
+								<a href="mailto:toi8x@netadx.ai">toi8x@netadx.ai</a>
 							</div>
 						</div>
 						<div class="contact-method">
 							<div class="contact-icon">
-								<i class="ph ph-lifebuoy" aria-hidden="true"></i>
+								<i class="ph ph-phone" aria-hidden="true"></i>
 							</div>
 							<div class="contact-method-content">
-								<h4>Support</h4>
-								<a href="mailto:toi8x@netadx.ai">toi8x@netadx.ai</a>
+								<h4>Điện thoại</h4>
+								<a href="tel:+84965134969">0965 134 969</a>
 							</div>
 						</div>
 					</div>
@@ -100,11 +94,11 @@ const pageContent = page?.data.content;
 					{
 						formStatus === "success" ? (
 							<div class="form-success">
-								<div class="success-icon">✓</div>
-								<h3>Message Sent!</h3>
+								<div class="success-icon">&#10003;</div>
+								<h3>Đã gửi tin nhắn!</h3>
 								<p>{formMessage}</p>
-								<a href="/contact" class="btn btn-secondary">
-									Send another message
+								<a href="/vi/contact" class="btn btn-secondary">
+									Gửi tin nhắn khác
 								</a>
 							</div>
 						) : (
@@ -117,13 +111,13 @@ const pageContent = page?.data.content;
 
 								<div class="form-row">
 									<div class="form-field">
-										<label for="name">Name *</label>
+										<label for="name">Họ tên *</label>
 										<input
 											type="text"
 											id="name"
 											name="name"
 											required
-											placeholder="Your name"
+											placeholder="Tên của bạn"
 											autocomplete="name"
 										/>
 									</div>
@@ -141,29 +135,29 @@ const pageContent = page?.data.content;
 								</div>
 
 								<div class="form-field">
-									<label for="company">Company</label>
+									<label for="company">Công ty</label>
 									<input
 										type="text"
 										id="company"
 										name="company"
-										placeholder="Your company"
+										placeholder="Công ty của bạn"
 										autocomplete="organization"
 									/>
 								</div>
 
 								<div class="form-field">
-									<label for="message">Message *</label>
+									<label for="message">Tin nhắn *</label>
 									<textarea
 										id="message"
 										name="message"
 										required
 										rows="5"
-										placeholder="Tell us about your project or question..."
+										placeholder="Hãy cho chúng tôi biết về dự án hoặc câu hỏi của bạn..."
 									/>
 								</div>
 
 								<button type="submit" class="btn btn-primary btn-lg">
-									Send Message
+									Gửi tin nhắn
 								</button>
 							</form>
 						)

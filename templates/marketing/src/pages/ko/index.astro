@@ -1,9 +1,9 @@
 ---
 import { getEmDashEntry, getEmDashCollection } from "emdash";
-import Base from "../layouts/Base.astro";
-import MarketingBlocks from "../components/MarketingBlocks.astro";
+import Base from "../../layouts/Base.astro";
+import MarketingBlocks from "../../components/MarketingBlocks.astro";
 
-const { entry: page, cacheHint } = await getEmDashEntry("pages", "home");
+const { entry: page, cacheHint } = await getEmDashEntry("pages", "home", { locale: "ko" });
 
 try {
 	Astro.cache.set(cacheHint);
@@ -18,25 +18,25 @@ try {
 		orderBy: "created_at",
 		order: "desc",
 		limit: 6,
-		locale: "en",
+		locale: "ko",
 	});
 	latestPosts = result.entries || [];
 } catch {}
 ---
 
 <Base
-	title={pageTitle !== "Home" ? pageTitle : undefined}
-	description="Build products people actually want. The all-in-one platform for modern teams."
+	title={pageTitle !== "홈" ? pageTitle : undefined}
+	description="사람들이 정말 원하는 제품을 만드세요. 현대 팀을 위한 올인원 플랫폼."
 >
 	{
 		pageContent ? (
 			<MarketingBlocks value={pageContent} />
 		) : (
 			<div class="empty-state">
-				<h1>Welcome to Acme</h1>
-				<p>Edit the home page content in the admin to get started.</p>
+				<h1>환영합니다</h1>
+				<p>관리자 페이지에서 홈페이지 콘텐츠를 편집하여 시작하세요.</p>
 				<a href="/_emdash/admin" class="btn btn-primary">
-					Open Admin
+					관리자 열기
 				</a>
 			</div>
 		)
@@ -45,18 +45,18 @@ try {
 	{latestPosts && latestPosts.length > 0 && (
 		<section class="latest-posts">
 			<div class="container">
-				<h2 class="section-heading">Latest from the Blog</h2>
+				<h2 class="section-heading">최신 블로그</h2>
 				<div class="posts-grid">
 					{latestPosts.map((post) => (
-						<a href={`/posts/${post.id}`} class="post-card">
+						<a href={`/ko/posts/${post.id}`} class="post-card">
 							<h3 class="post-title">{post.data.title}</h3>
 							{post.data.excerpt && <p class="post-excerpt">{post.data.excerpt}</p>}
-							<span class="post-link">Read more &rarr;</span>
+							<span class="post-link">더 읽기 &rarr;</span>
 						</a>
 					))}
 				</div>
 				<div class="posts-cta">
-					<a href="/posts" class="btn btn-secondary">View all posts &rarr;</a>
+					<a href="/ko/posts" class="btn btn-secondary">모든 게시물 &rarr;</a>
 				</div>
 			</div>
 		</section>

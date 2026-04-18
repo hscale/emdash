@@ -1,9 +1,9 @@
 ---
 import { getEmDashEntry, getEmDashCollection } from "emdash";
-import Base from "../layouts/Base.astro";
-import MarketingBlocks from "../components/MarketingBlocks.astro";
+import Base from "../../layouts/Base.astro";
+import MarketingBlocks from "../../components/MarketingBlocks.astro";
 
-const { entry: page, cacheHint } = await getEmDashEntry("pages", "home");
+const { entry: page, cacheHint } = await getEmDashEntry("pages", "home", { locale: "zh" });
 
 try {
 	Astro.cache.set(cacheHint);
@@ -18,25 +18,25 @@ try {
 		orderBy: "created_at",
 		order: "desc",
 		limit: 6,
-		locale: "en",
+		locale: "zh",
 	});
 	latestPosts = result.entries || [];
 } catch {}
 ---
 
 <Base
-	title={pageTitle !== "Home" ? pageTitle : undefined}
-	description="Build products people actually want. The all-in-one platform for modern teams."
+	title={pageTitle !== "首页" ? pageTitle : undefined}
+	description="打造人们真正需要的产品。面向现代团队的一体化平台。"
 >
 	{
 		pageContent ? (
 			<MarketingBlocks value={pageContent} />
 		) : (
 			<div class="empty-state">
-				<h1>Welcome to Acme</h1>
-				<p>Edit the home page content in the admin to get started.</p>
+				<h1>欢迎</h1>
+				<p>在管理后台编辑首页内容以开始使用。</p>
 				<a href="/_emdash/admin" class="btn btn-primary">
-					Open Admin
+					打开管理后台
 				</a>
 			</div>
 		)
@@ -45,18 +45,18 @@ try {
 	{latestPosts && latestPosts.length > 0 && (
 		<section class="latest-posts">
 			<div class="container">
-				<h2 class="section-heading">Latest from the Blog</h2>
+				<h2 class="section-heading">最新博客文章</h2>
 				<div class="posts-grid">
 					{latestPosts.map((post) => (
-						<a href={`/posts/${post.id}`} class="post-card">
+						<a href={`/zh/posts/${post.id}`} class="post-card">
 							<h3 class="post-title">{post.data.title}</h3>
 							{post.data.excerpt && <p class="post-excerpt">{post.data.excerpt}</p>}
-							<span class="post-link">Read more &rarr;</span>
+							<span class="post-link">阅读更多 &rarr;</span>
 						</a>
 					))}
 				</div>
 				<div class="posts-cta">
-					<a href="/posts" class="btn btn-secondary">View all posts &rarr;</a>
+					<a href="/zh/posts" class="btn btn-secondary">查看全部 &rarr;</a>
 				</div>
 			</div>
 		</section>

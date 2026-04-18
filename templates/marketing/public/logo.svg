@@ -1,0 +1,42 @@
+<svg width="360" height="80" viewBox="0 0 360 80" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    ISO BPMS Full Logo
+    Version: 1.0.0
+    Created: 2026-04-03
+    Brand: ISO BPMS by NetADX AI
+    Colors: Navy #132f5e, Green #7bc03b
+  -->
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#132f5e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7bc03b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Process flow icon mark -->
+  <g transform="translate(8, 12)">
+    <!-- Three connected process nodes -->
+    <rect x="0" y="16" width="16" height="16" rx="3" fill="#132f5e"/>
+    <rect x="22" y="4" width="16" height="16" rx="3" fill="#7bc03b"/>
+    <rect x="22" y="28" width="16" height="16" rx="3" fill="#132f5e" opacity="0.6"/>
+    <rect x="44" y="16" width="16" height="16" rx="3" fill="#7bc03b"/>
+    <!-- Connector lines -->
+    <line x1="16" y1="24" x2="22" y2="12" stroke="#132f5e" stroke-width="2" stroke-linecap="round"/>
+    <line x1="16" y1="24" x2="22" y2="36" stroke="#132f5e" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+    <line x1="38" y1="12" x2="44" y2="24" stroke="#7bc03b" stroke-width="2" stroke-linecap="round"/>
+    <line x1="38" y1="36" x2="44" y2="24" stroke="#7bc03b" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  </g>
+
+  <!-- ISO BPMS wordmark -->
+  <text x="82" y="50" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="700" fill="#132f5e" letter-spacing="-0.5">
+    ISO
+  </text>
+  <text x="134" y="50" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="700" fill="#7bc03b" letter-spacing="-0.5">
+    BPMS
+  </text>
+
+  <!-- Subtitle -->
+  <text x="82" y="66" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="400" fill="#6b7280" letter-spacing="2">
+    BUSINESS PROCESS MANAGEMENT
+  </text>
+</svg>

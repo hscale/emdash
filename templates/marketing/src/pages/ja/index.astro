@@ -1,9 +1,9 @@
 ---
 import { getEmDashEntry, getEmDashCollection } from "emdash";
-import Base from "../layouts/Base.astro";
-import MarketingBlocks from "../components/MarketingBlocks.astro";
+import Base from "../../layouts/Base.astro";
+import MarketingBlocks from "../../components/MarketingBlocks.astro";
 
-const { entry: page, cacheHint } = await getEmDashEntry("pages", "home");
+const { entry: page, cacheHint } = await getEmDashEntry("pages", "home", { locale: "ja" });
 
 try {
 	Astro.cache.set(cacheHint);
@@ -18,25 +18,25 @@ try {
 		orderBy: "created_at",
 		order: "desc",
 		limit: 6,
-		locale: "en",
+		locale: "ja",
 	});
 	latestPosts = result.entries || [];
 } catch {}
 ---
 
 <Base
-	title={pageTitle !== "Home" ? pageTitle : undefined}
-	description="Build products people actually want. The all-in-one platform for modern teams."
+	title={pageTitle !== "ホーム" ? pageTitle : undefined}
+	description="人々が本当に求める製品を構築しましょう。現代のチームのためのオールインワンプラットフォーム。"
 >
 	{
 		pageContent ? (
 			<MarketingBlocks value={pageContent} />
 		) : (
 			<div class="empty-state">
-				<h1>Welcome to Acme</h1>
-				<p>Edit the home page content in the admin to get started.</p>
+				<h1>ようこそ</h1>
+				<p>管理画面でホームページのコンテンツを編集して始めましょう。</p>
 				<a href="/_emdash/admin" class="btn btn-primary">
-					Open Admin
+					管理画面を開く
 				</a>
 			</div>
 		)
@@ -45,18 +45,18 @@ try {
 	{latestPosts && latestPosts.length > 0 && (
 		<section class="latest-posts">
 			<div class="container">
-				<h2 class="section-heading">Latest from the Blog</h2>
+				<h2 class="section-heading">最新のブログ記事</h2>
 				<div class="posts-grid">
 					{latestPosts.map((post) => (
-						<a href={`/posts/${post.id}`} class="post-card">
+						<a href={`/ja/posts/${post.id}`} class="post-card">
 							<h3 class="post-title">{post.data.title}</h3>
 							{post.data.excerpt && <p class="post-excerpt">{post.data.excerpt}</p>}
-							<span class="post-link">Read more &rarr;</span>
+							<span class="post-link">続きを読む &rarr;</span>
 						</a>
 					))}
 				</div>
 				<div class="posts-cta">
-					<a href="/posts" class="btn btn-secondary">View all posts &rarr;</a>
+					<a href="/ja/posts" class="btn btn-secondary">すべての記事 &rarr;</a>
 				</div>
 			</div>
 		</section>

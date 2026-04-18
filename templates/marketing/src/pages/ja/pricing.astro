@@ -1,0 +1,50 @@
+---
+import { getEmDashEntry } from "emdash";
+import Base from "../../layouts/Base.astro";
+import MarketingBlocks from "../../components/MarketingBlocks.astro";
+
+const { entry: page, cacheHint } = await getEmDashEntry("pages", "pricing", { locale: "ja" });
+
+try {
+	Astro.cache.set(cacheHint);
+} catch {}
+
+const pageContent = page?.data.content;
+---
+
+<Base
+	title="料金プラン"
+	description="シンプルで透明な料金体系。隠れた費用はありません。"
+>
+	{
+		pageContent ? (
+			<MarketingBlocks value={pageContent} />
+		) : (
+			<div class="empty-state">
+				<h1>料金プラン</h1>
+				<p>管理画面で料金コンテンツを追加してください。</p>
+				<a href="/_emdash/admin" class="btn btn-primary">
+					管理画面を開く
+				</a>
+			</div>
+		)
+	}
+</Base>
+
+<style>
+	.empty-state {
+		text-align: center;
+		padding: var(--spacing-5xl) var(--spacing-lg);
+		max-width: var(--max-width);
+		margin: 0 auto;
+	}
+
+	.empty-state h1 {
+		margin-bottom: var(--spacing-md);
+	}
+
+	.empty-state p {
+		color: var(--color-muted);
+		margin-bottom: var(--spacing-xl);
+	}
+</style>

@@ -16,7 +16,7 @@ const { headline, subheadline, primaryCta, secondaryCta, image, centered } = nod
 
 <section class:list={["hero", { "hero-centered": centered, "hero-with-image": !!image }]}>
 	<div class="hero-content">
-		<h1 class="hero-headline">{headline}</h1>
+		<h1 class="hero-headline" set:html={headline} />
 		{subheadline && <p class="hero-subheadline">{subheadline}</p>}
 		{(primaryCta || secondaryCta) && (
 			<div class="hero-actions">

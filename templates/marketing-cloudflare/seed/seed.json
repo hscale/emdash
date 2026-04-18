@@ -163,7 +163,7 @@
 							"_type": "marketing.hero",
 							"_key": "pricing-hero",
 							"headline": "Simple, transparent pricing",
-							"subheadline": "No hidden fees. No surprises. Start free and scale as you grow.",
+							"subheadline": "Start free. Pay per user as your team grows. Profitable from day one.",
 							"centered": true
 						},
 						{
@@ -171,46 +171,64 @@
 							"_key": "pricing-plans",
 							"plans": [
 								{
-									"name": "Starter",
+									"name": "Free",
 									"price": "$0",
 									"period": "/month",
-									"description": "Perfect for trying things out",
+									"description": "For individuals and small teams getting started",
 									"features": [
-										"Up to 3 team members",
-										"5 projects",
-										"Basic analytics",
-										"Community support",
-										"1GB storage"
+										"Up to 3 users",
+										"2 modules",
+										"1,000 records",
+										"AI object builder",
+										"Community support"
 									],
-									"cta": { "label": "Get Started", "url": "/signup" }
+									"cta": { "label": "Get Started Free", "url": "/signup" }
 								},
 								{
-									"name": "Pro",
-									"price": "$29",
+									"name": "Team",
+									"price": "$9",
 									"period": "/user/month",
-									"description": "For growing teams",
+									"description": "For growing teams that need more power",
 									"features": [
-										"Unlimited team members",
-										"Unlimited projects",
-										"Advanced analytics",
-										"Priority support",
-										"100GB storage",
-										"Custom integrations",
+										"Up to 20 users",
+										"5 modules",
+										"Unlimited records",
+										"AI workflow builder",
+										"Visual workflow designer",
+										"Priority email support",
 										"API access"
 									],
-									"cta": { "label": "Start Free Trial", "url": "/signup?plan=pro" },
+									"cta": { "label": "Start 14-day Trial", "url": "/signup?plan=team" },
 									"highlighted": true
+								},
+								{
+									"name": "Business",
+									"price": "$19",
+									"period": "/user/month",
+									"description": "For organizations that need full control",
+									"features": [
+										"Unlimited users",
+										"All 9+ modules",
+										"AI process copilot",
+										"Custom modules",
+										"Advanced analytics",
+										"SSO & audit logs",
+										"Dedicated support",
+										"SLA guarantee"
+									],
+									"cta": { "label": "Start 14-day Trial", "url": "/signup?plan=business" }
 								},
 								{
 									"name": "Enterprise",
 									"price": "Custom",
-									"description": "For large organizations",
+									"description": "For large organizations with specific needs",
 									"features": [
-										"Everything in Pro",
-										"Dedicated support",
+										"Everything in Business",
+										"Self-hosted option",
+										"AI process insights",
 										"Custom contracts",
-										"SLA guarantee",
-										"Unlimited storage"
+										"Unlimited storage",
+										"Dedicated account manager"
 									],
 									"cta": { "label": "Contact Sales", "url": "/contact" }
 								}
@@ -227,11 +245,133 @@
 								},
 								{
 									"question": "What payment methods do you accept?",
-									"answer": "We accept all major credit cards, and Enterprise customers can pay via invoice with NET 30 terms."
+									"answer": "We accept all major credit cards and bank transfers. Enterprise customers can pay via invoice with NET 30 terms."
 								},
 								{
 									"question": "Is there a discount for annual billing?",
-									"answer": "Yes, annual plans receive a 20% discount compared to monthly billing."
+									"answer": "Yes! Annual plans receive a 20% discount compared to monthly billing. Team annual is $7/user/month, Business annual is $15/user/month."
+								},
+								{
+									"question": "What is a user?",
+									"answer": "A user is anyone who logs into your workspace. You only pay for active users — deactivated users don't count."
+								},
+								{
+									"question": "Can I add more modules on the Team plan?",
+									"answer": "Yes, additional modules are available as add-ons at $3/module/month on the Team plan. The Business plan includes all modules."
+								}
+							]
+						}
+					]
+				}
+			},
+			{
+				"id": "pricing-vi",
+				"slug": "pricing",
+				"locale": "vi",
+				"translationOf": "pricing",
+				"status": "published",
+				"data": {
+					"title": "Bảng giá",
+					"content": [
+						{
+							"_type": "marketing.hero",
+							"_key": "pricing-hero-vi",
+							"headline": "Bảng giá đơn giản, minh bạch",
+							"subheadline": "Bắt đầu miễn phí. Thanh toán theo người dùng khi đội ngũ phát triển. Có lãi ngay từ ngày đầu.",
+							"centered": true
+						},
+						{
+							"_type": "marketing.pricing",
+							"_key": "pricing-plans-vi",
+							"plans": [
+								{
+									"name": "Miễn phí",
+									"price": "$0",
+									"period": "/tháng",
+									"description": "Dành cho cá nhân và nhóm nhỏ bắt đầu",
+									"features": [
+										"Tối đa 3 người dùng",
+										"2 module",
+										"1.000 bản ghi",
+										"AI tạo đối tượng",
+										"Hỗ trợ cộng đồng"
+									],
+									"cta": { "label": "Bắt đầu miễn phí", "url": "/signup" }
+								},
+								{
+									"name": "Nhóm",
+									"price": "$9",
+									"period": "/người/tháng",
+									"description": "Cho đội ngũ đang phát triển cần thêm sức mạnh",
+									"features": [
+										"Tối đa 20 người dùng",
+										"5 module",
+										"Không giới hạn bản ghi",
+										"AI xây dựng workflow",
+										"Thiết kế workflow trực quan",
+										"Hỗ trợ email ưu tiên",
+										"Truy cập API"
+									],
+									"cta": { "label": "Dùng thử 14 ngày", "url": "/signup?plan=team" },
+									"highlighted": true
+								},
+								{
+									"name": "Doanh nghiệp",
+									"price": "$19",
+									"period": "/người/tháng",
+									"description": "Cho tổ chức cần toàn quyền kiểm soát",
+									"features": [
+										"Không giới hạn người dùng",
+										"Tất cả 9+ module",
+										"AI trợ lý quy trình",
+										"Module tùy chỉnh",
+										"Phân tích nâng cao",
+										"SSO & nhật ký kiểm toán",
+										"Hỗ trợ chuyên biệt",
+										"Cam kết SLA"
+									],
+									"cta": { "label": "Dùng thử 14 ngày", "url": "/signup?plan=business" }
+								},
+								{
+									"name": "Đặc biệt",
+									"price": "Liên hệ",
+									"description": "Cho tổ chức lớn có nhu cầu riêng",
+									"features": [
+										"Tất cả tính năng Doanh nghiệp",
+										"Triển khai riêng (self-hosted)",
+										"AI phân tích quy trình",
+										"Hợp đồng tùy chỉnh",
+										"Lưu trữ không giới hạn",
+										"Quản lý tài khoản riêng"
+									],
+									"cta": { "label": "Liên hệ tư vấn", "url": "/contact" }
+								}
+							]
+						},
+						{
+							"_type": "marketing.faq",
+							"_key": "pricing-faq-vi",
+							"headline": "Câu hỏi thường gặp về giá",
+							"items": [
+								{
+									"question": "Tôi có thể thay đổi gói sau không?",
+									"answer": "Có, bạn có thể nâng cấp hoặc hạ cấp bất cứ lúc nào. Thay đổi có hiệu lực ngay và chúng tôi sẽ tính phí theo tỷ lệ."
+								},
+								{
+									"question": "Chấp nhận phương thức thanh toán nào?",
+									"answer": "Chúng tôi chấp nhận tất cả thẻ tín dụng chính và chuyển khoản ngân hàng. Khách hàng Đặc biệt có thể thanh toán theo hóa đơn với thời hạn NET 30."
+								},
+								{
+									"question": "Có giảm giá khi thanh toán theo năm không?",
+									"answer": "Có! Gói năm được giảm 20% so với thanh toán hàng tháng. Gói Nhóm chỉ còn $7/người/tháng, gói Doanh nghiệp chỉ còn $15/người/tháng."
+								},
+								{
+									"question": "Người dùng là gì?",
+									"answer": "Người dùng là bất kỳ ai đăng nhập vào workspace của bạn. Bạn chỉ trả cho người dùng đang hoạt động — người dùng bị vô hiệu hóa không tính phí."
+								},
+								{
+									"question": "Tôi có thể thêm module trên gói Nhóm không?",
+									"answer": "Có, các module bổ sung có sẵn dưới dạng add-on với giá $3/module/tháng trên gói Nhóm. Gói Doanh nghiệp bao gồm tất cả module."
 								}
 							]
 						}

@@ -9,6 +9,9 @@ export default defineConfig({
 	adapter: node({
 		mode: "standalone",
 	}),
+	security: {
+		allowedDomains: [{ hostname: "isobpms.com", protocol: "https" }],
+	},
 	image: {
 		layout: "constrained",
 		responsiveStyles: true,

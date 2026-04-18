@@ -1,0 +1,38 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0a0e1a"/>
+  <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
+    <circle cx="20" cy="20" r=".8" fill="rgba(123,192,59,.1)"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <!-- Product grid - 4x3 boxes -->
+  <rect x="370" y="160" width="60" height="60" rx="6" fill="none" stroke="#4f46e5" stroke-width="1.5" opacity=".4"/>
+  <rect x="450" y="160" width="60" height="60" rx="6" fill="#4f46e5" opacity=".15"/>
+  <rect x="450" y="160" width="60" height="60" rx="6" fill="none" stroke="#4f46e5" stroke-width="1.5" opacity=".5"/>
+  <rect x="530" y="160" width="60" height="60" rx="6" fill="none" stroke="#7bc03b" stroke-width="1.5" opacity=".4"/>
+  <rect x="610" y="160" width="60" height="60" rx="6" fill="none" stroke="#4f46e5" stroke-width="1.5" opacity=".3"/>
+  <rect x="690" y="160" width="60" height="60" rx="6" fill="#7bc03b" opacity=".12"/>
+  <rect x="690" y="160" width="60" height="60" rx="6" fill="none" stroke="#7bc03b" stroke-width="1.5" opacity=".5"/>
+  <rect x="770" y="160" width="60" height="60" rx="6" fill="none" stroke="#4f46e5" stroke-width="1.5" opacity=".35"/>
+  <rect x="370" y="240" width="60" height="60" rx="6" fill="#7bc03b" opacity=".1"/>
+  <rect x="370" y="240" width="60" height="60" rx="6" fill="none" stroke="#7bc03b" stroke-width="1.5" opacity=".45"/>
+  <rect x="450" y="240" width="60" height="60" rx="6" fill="none" stroke="#4f46e5" stroke-width="1.5" opacity=".35"/>
+  <rect x="530" y="240" width="60" height="60" rx="6" fill="#4f46e5" opacity=".2"/>
+  <rect x="530" y="240" width="60" height="60" rx="6" fill="none" stroke="#4f46e5" stroke-width="1.5" opacity=".6"/>
+  <rect x="610" y="240" width="60" height="60" rx="6" fill="none" stroke="#7bc03b" stroke-width="1.5" opacity=".35"/>
+  <rect x="690" y="240" width="60" height="60" rx="6" fill="none" stroke="#4f46e5" stroke-width="1.5" opacity=".3"/>
+  <rect x="770" y="240" width="60" height="60" rx="6" fill="#4f46e5" opacity=".1"/>
+  <rect x="770" y="240" width="60" height="60" rx="6" fill="none" stroke="#4f46e5" stroke-width="1.5" opacity=".4"/>
+  <rect x="370" y="320" width="60" height="60" rx="6" fill="none" stroke="#4f46e5" stroke-width="1.5" opacity=".3"/>
+  <rect x="450" y="320" width="60" height="60" rx="6" fill="#7bc03b" opacity=".15"/>
+  <rect x="450" y="320" width="60" height="60" rx="6" fill="none" stroke="#7bc03b" stroke-width="1.5" opacity=".5"/>
+  <rect x="530" y="320" width="60" height="60" rx="6" fill="none" stroke="#4f46e5" stroke-width="1.5" opacity=".35"/>
+  <rect x="610" y="320" width="60" height="60" rx="6" fill="none" stroke="#7bc03b" stroke-width="1.5" opacity=".4"/>
+  <rect x="690" y="320" width="60" height="60" rx="6" fill="#4f46e5" opacity=".12"/>
+  <rect x="690" y="320" width="60" height="60" rx="6" fill="none" stroke="#4f46e5" stroke-width="1.5" opacity=".45"/>
+  <rect x="770" y="320" width="60" height="60" rx="6" fill="none" stroke="#7bc03b" stroke-width="1.5" opacity=".3"/>
+  <!-- Category label -->
+  <text x="600" y="440" text-anchor="middle" fill="#e2e8f0" font-family="Inter,system-ui,sans-serif" font-size="48" font-weight="800" letter-spacing="-1">RETAIL</text>
+  <text x="600" y="480" text-anchor="middle" fill="rgba(226,232,240,.4)" font-family="Inter,system-ui,sans-serif" font-size="18" font-weight="400">Commerce &amp; Customer Experience</text>
+  <!-- Brand -->
+  <text x="600" y="580" text-anchor="middle" fill="rgba(123,192,59,.4)" font-family="Inter,system-ui,sans-serif" font-size="16" font-weight="600" letter-spacing="2">ISO BPMS</text>
+</svg>
