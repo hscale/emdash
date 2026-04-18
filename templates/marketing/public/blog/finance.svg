@@ -1,0 +1,31 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0a0e1a"/>
+  <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
+    <circle cx="20" cy="20" r=".8" fill="rgba(123,192,59,.1)"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <!-- Bar chart -->
+  <rect x="320" y="300" width="40" height="60" rx="3" fill="#4f46e5" opacity=".4"/>
+  <rect x="380" y="270" width="40" height="90" rx="3" fill="#4f46e5" opacity=".5"/>
+  <rect x="440" y="240" width="40" height="120" rx="3" fill="#4f46e5" opacity=".5"/>
+  <rect x="500" y="220" width="40" height="140" rx="3" fill="#7bc03b" opacity=".4"/>
+  <rect x="560" y="260" width="40" height="100" rx="3" fill="#4f46e5" opacity=".5"/>
+  <rect x="620" y="200" width="40" height="160" rx="3" fill="#7bc03b" opacity=".5"/>
+  <rect x="680" y="230" width="40" height="130" rx="3" fill="#4f46e5" opacity=".5"/>
+  <rect x="740" y="180" width="40" height="180" rx="3" fill="#7bc03b" opacity=".6"/>
+  <rect x="800" y="160" width="40" height="200" rx="3" fill="#7bc03b" opacity=".7"/>
+  <!-- Trend line -->
+  <polyline points="340,295 400,265 460,235 520,215 580,255 640,195 700,225 760,175 820,155" fill="none" stroke="#7bc03b" stroke-width="2" opacity=".6"/>
+  <!-- Trend dots -->
+  <circle cx="340" cy="295" r="3" fill="#7bc03b" opacity=".7"/>
+  <circle cx="520" cy="215" r="3" fill="#7bc03b" opacity=".7"/>
+  <circle cx="640" cy="195" r="3" fill="#7bc03b" opacity=".7"/>
+  <circle cx="820" cy="155" r="3" fill="#7bc03b" opacity=".7"/>
+  <!-- Baseline -->
+  <line x1="300" y1="360" x2="860" y2="360" stroke="rgba(226,232,240,.15)" stroke-width="1"/>
+  <!-- Category label -->
+  <text x="600" y="420" text-anchor="middle" fill="#e2e8f0" font-family="Inter,system-ui,sans-serif" font-size="48" font-weight="800" letter-spacing="-1">FINANCE</text>
+  <text x="600" y="460" text-anchor="middle" fill="rgba(226,232,240,.4)" font-family="Inter,system-ui,sans-serif" font-size="18" font-weight="400">Financial Operations &amp; Compliance</text>
+  <!-- Brand -->
+  <text x="600" y="580" text-anchor="middle" fill="rgba(123,192,59,.4)" font-family="Inter,system-ui,sans-serif" font-size="16" font-weight="600" letter-spacing="2">ISO BPMS</text>
+</svg>

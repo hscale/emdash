@@ -1,19 +1,14 @@
 ---
 import { getEmDashEntry } from "emdash";
-import Base from "../layouts/Base.astro";
-import MarketingBlocks from "../components/MarketingBlocks.astro";
+import Base from "../../layouts/Base.astro";
+import MarketingBlocks from "../../components/MarketingBlocks.astro";
 
-const { entry: page, cacheHint } = await getEmDashEntry("pages", "contact");
+const { entry: page, cacheHint } = await getEmDashEntry("pages", "contact", { locale: "ja" });
 
 try {
 	Astro.cache.set(cacheHint);
 } catch {}
 
-// Handle form submission
-// NOTE: This is demo code. For production, add:
-// - CSRF token validation
-// - Rate limiting (e.g., via Cloudflare or middleware)
-// - Actual email sending or webhook integration
 let formStatus: "idle" | "success" | "error" = "idle";
 let formMessage = "";
 
@@ -27,12 +22,11 @@ if (Astro.request.method === "POST") {
 
 		if (!name || !email || !message) {
 			formStatus = "error";
-			formMessage = "Please fill in all required fields.";
+			formMessage = "必須項目をすべて入力してください。";
 		} else if (!email.includes("@")) {
 			formStatus = "error";
-			formMessage = "Please enter a valid email address.";
+			formMessage = "有効なメールアドレスを入力してください。";
 		} else {
-			// TODO: Replace with actual email/webhook integration
 			console.log("Contact form submission:", {
 				name,
 				email,
@@ -41,11 +35,11 @@ if (Astro.request.method === "POST") {
 			});
 			formStatus = "success";
 			formMessage =
-				"Thanks for reaching out! We'll get back to you within 24 hours.";
+				"お問い合わせありがとうございます！24時間以内にご連絡いたします。";
 		}
 	} catch {
 		formStatus = "error";
-		formMessage = "Something went wrong. Please try again.";
+		formMessage = "エラーが発生しました。もう一度お試しください。";
 	}
 }
 
@@ -53,8 +47,8 @@ const pageContent = page?.data.content;
 ---
 
 <Base
-	title="Contact"
-	description="Have questions? Want a demo? We'd love to hear from you."
+	title="お問い合わせ"
+	description="ご質問がありますか？デモをご希望ですか？お気軽にお問い合わせください。"
 >
 	{pageContent && <MarketingBlocks value={pageContent} />}
 
@@ -62,8 +56,8 @@ const pageContent = page?.data.content;
 		<div class="container">
 			<div class="contact-grid">
 				<div class="contact-info">
-					<h2>Talk to our team</h2>
-					<p>Fill out the form and we'll be in touch within 24 hours.</p>
+					<h2>チームにお問い合わせ</h2>
+					<p>フォームにご記入ください。24時間以内にご連絡いたします。</p>
 
 					<div class="contact-methods">
 						<div class="contact-method">
@@ -71,7 +65,16 @@ const pageContent = page?.data.content;
 								<i class="ph ph-envelope" aria-hidden="true"></i>
 							</div>
 							<div class="contact-method-content">
-								<h4>Email</h4>
+								<h4>メール</h4>
+								<a href="mailto:toi8x@netadx.ai">toi8x@netadx.ai</a>
+							</div>
+						</div>
+						<div class="contact-method">
+							<div class="contact-icon">
+								<i class="ph ph-lifebuoy" aria-hidden="true"></i>
+							</div>
+							<div class="contact-method-content">
+								<h4>サポート</h4>
 								<a href="mailto:toi8x@netadx.ai">toi8x@netadx.ai</a>
 							</div>
 						</div>
@@ -80,17 +83,8 @@ const pageContent = page?.data.content;
 								<i class="ph ph-phone" aria-hidden="true"></i>
 							</div>
 							<div class="contact-method-content">
-								<h4>Phone</h4>
+								<h4>電話</h4>
 								<a href="tel:+84965134969">0965 134 969</a>
-							</div>
-						</div>
-						<div class="contact-method">
-							<div class="contact-icon">
-								<i class="ph ph-lifebuoy" aria-hidden="true"></i>
-							</div>
-							<div class="contact-method-content">
-								<h4>Support</h4>
-								<a href="mailto:toi8x@netadx.ai">toi8x@netadx.ai</a>
 							</div>
 						</div>
 					</div>
@@ -100,11 +94,11 @@ const pageContent = page?.data.content;
 					{
 						formStatus === "success" ? (
 							<div class="form-success">
-								<div class="success-icon">✓</div>
-								<h3>Message Sent!</h3>
+								<div class="success-icon">&#10003;</div>
+								<h3>メッセージを送信しました！</h3>
 								<p>{formMessage}</p>
-								<a href="/contact" class="btn btn-secondary">
-									Send another message
+								<a href="/ja/contact" class="btn btn-secondary">
+									別のメッセージを送信
 								</a>
 							</div>
 						) : (
@@ -117,18 +111,18 @@ const pageContent = page?.data.content;
 
 								<div class="form-row">
 									<div class="form-field">
-										<label for="name">Name *</label>
+										<label for="name">お名前 *</label>
 										<input
 											type="text"
 											id="name"
 											name="name"
 											required
-											placeholder="Your name"
+											placeholder="お名前"
 											autocomplete="name"
 										/>
 									</div>
 									<div class="form-field">
-										<label for="email">Email *</label>
+										<label for="email">メール *</label>
 										<input
 											type="email"
 											id="email"
@@ -141,29 +135,29 @@ const pageContent = page?.data.content;
 								</div>
 
 								<div class="form-field">
-									<label for="company">Company</label>
+									<label for="company">会社名</label>
 									<input
 										type="text"
 										id="company"
 										name="company"
-										placeholder="Your company"
+										placeholder="会社名"
 										autocomplete="organization"
 									/>
 								</div>
 
 								<div class="form-field">
-									<label for="message">Message *</label>
+									<label for="message">メッセージ *</label>
 									<textarea
 										id="message"
 										name="message"
 										required
 										rows="5"
-										placeholder="Tell us about your project or question..."
+										placeholder="プロジェクトやご質問についてお聞かせください..."
 									/>
 								</div>
 
 								<button type="submit" class="btn btn-primary btn-lg">
-									Send Message
+									メッセージを送信
 								</button>
 							</form>
 						)

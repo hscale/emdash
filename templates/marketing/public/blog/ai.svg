@@ -1,0 +1,55 @@
+<svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0a0e1a"/>
+  <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
+    <circle cx="20" cy="20" r=".8" fill="rgba(123,192,59,.1)"/>
+  </pattern>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <!-- Central glow -->
+  <circle cx="600" cy="240" r="100" fill="#4f46e5" opacity=".06"/>
+  <!-- Layer 1 -->
+  <circle cx="350" cy="170" r="8" fill="#7bc03b" opacity=".5"/>
+  <circle cx="350" cy="240" r="8" fill="#7bc03b" opacity=".5"/>
+  <circle cx="350" cy="310" r="8" fill="#7bc03b" opacity=".5"/>
+  <!-- Layer 2 -->
+  <circle cx="500" cy="190" r="10" fill="#4f46e5" opacity=".5"/>
+  <circle cx="500" cy="250" r="10" fill="#4f46e5" opacity=".5"/>
+  <circle cx="500" cy="310" r="10" fill="#4f46e5" opacity=".4"/>
+  <!-- Layer 3 -->
+  <circle cx="600" cy="180" r="12" fill="#7bc03b" opacity=".6"/>
+  <circle cx="600" cy="240" r="14" fill="#7bc03b" opacity=".7"/>
+  <circle cx="600" cy="300" r="12" fill="#7bc03b" opacity=".6"/>
+  <!-- Layer 4 -->
+  <circle cx="700" cy="190" r="10" fill="#4f46e5" opacity=".5"/>
+  <circle cx="700" cy="250" r="10" fill="#4f46e5" opacity=".5"/>
+  <circle cx="700" cy="310" r="10" fill="#4f46e5" opacity=".4"/>
+  <!-- Layer 5 -->
+  <circle cx="850" cy="200" r="8" fill="#7bc03b" opacity=".5"/>
+  <circle cx="850" cy="280" r="8" fill="#7bc03b" opacity=".5"/>
+  <!-- L1-L2 -->
+  <line x1="358" y1="170" x2="490" y2="190" stroke="#7bc03b" stroke-width=".8" opacity=".2"/>
+  <line x1="358" y1="240" x2="490" y2="250" stroke="#7bc03b" stroke-width=".8" opacity=".2"/>
+  <line x1="358" y1="310" x2="490" y2="310" stroke="#7bc03b" stroke-width=".8" opacity=".2"/>
+  <line x1="358" y1="170" x2="490" y2="250" stroke="#7bc03b" stroke-width=".8" opacity=".12"/>
+  <line x1="358" y1="310" x2="490" y2="250" stroke="#7bc03b" stroke-width=".8" opacity=".12"/>
+  <!-- L2-L3 -->
+  <line x1="510" y1="190" x2="588" y2="180" stroke="#4f46e5" stroke-width="1" opacity=".3"/>
+  <line x1="510" y1="250" x2="588" y2="240" stroke="#4f46e5" stroke-width="1" opacity=".3"/>
+  <line x1="510" y1="310" x2="588" y2="300" stroke="#4f46e5" stroke-width="1" opacity=".3"/>
+  <line x1="510" y1="190" x2="588" y2="240" stroke="#4f46e5" stroke-width="1" opacity=".15"/>
+  <line x1="510" y1="250" x2="588" y2="300" stroke="#4f46e5" stroke-width="1" opacity=".15"/>
+  <!-- L3-L4 -->
+  <line x1="612" y1="180" x2="690" y2="190" stroke="#7bc03b" stroke-width="1" opacity=".3"/>
+  <line x1="612" y1="240" x2="690" y2="250" stroke="#7bc03b" stroke-width="1" opacity=".3"/>
+  <line x1="612" y1="300" x2="690" y2="310" stroke="#7bc03b" stroke-width="1" opacity=".3"/>
+  <line x1="612" y1="180" x2="690" y2="250" stroke="#7bc03b" stroke-width="1" opacity=".15"/>
+  <line x1="612" y1="300" x2="690" y2="250" stroke="#7bc03b" stroke-width="1" opacity=".15"/>
+  <!-- L4-L5 -->
+  <line x1="710" y1="190" x2="842" y2="200" stroke="#4f46e5" stroke-width=".8" opacity=".25"/>
+  <line x1="710" y1="250" x2="842" y2="280" stroke="#4f46e5" stroke-width=".8" opacity=".25"/>
+  <line x1="710" y1="310" x2="842" y2="280" stroke="#4f46e5" stroke-width=".8" opacity=".2"/>
+  <line x1="710" y1="190" x2="842" y2="280" stroke="#4f46e5" stroke-width=".8" opacity=".12"/>
+  <!-- Label -->
+  <text x="600" y="420" text-anchor="middle" fill="#e2e8f0" font-family="Inter,system-ui,sans-serif" font-size="48" font-weight="800" letter-spacing="-1">ARTIFICIAL INTELLIGENCE</text>
+  <text x="600" y="460" text-anchor="middle" fill="rgba(226,232,240,.4)" font-family="Inter,system-ui,sans-serif" font-size="18" font-weight="400">AI-Powered Process Intelligence</text>
+  <text x="600" y="580" text-anchor="middle" fill="rgba(123,192,59,.4)" font-family="Inter,system-ui,sans-serif" font-size="16" font-weight="600" letter-spacing="2">ISO BPMS</text>
+</svg>

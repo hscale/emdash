@@ -1,0 +1,94 @@
+---
+import { getEmDashEntry } from "emdash";
+import Base from "../../../layouts/Base.astro";
+import MarketingBlocks from "../../../components/MarketingBlocks.astro";
+
+const { slug } = Astro.params;
+const { entry: post, cacheHint } = await getEmDashEntry("posts", slug!, { locale: "ja" });
+
+try {
+	Astro.cache.set(cacheHint);
+} catch {}
+
+if (!post) {
+	return Astro.redirect("/404");
+}
+
+const postContent = post.data.content;
+---
+
+<Base
+	title={post.data.title}
+	description={post.data.excerpt || ""}
+	image={post.data.featured_image?.src || "/blog/general.svg"}
+>
+	<article class="post-article">
+		<div class="container">
+			<header class="post-header">
+				<a href="/ja/posts" class="post-back">&larr; ブログに戻る</a>
+				<h1 class="post-title">{post.data.title}</h1>
+				{post.data.excerpt && <p class="post-excerpt">{post.data.excerpt}</p>}
+			</header>
+			<div class="post-body">
+				{postContent ? (
+					<MarketingBlocks value={postContent} />
+				) : (
+					<p>No content.</p>
+				)}
+			</div>
+		</div>
+	</article>
+</Base>
+
+<style>
+	.post-article {
+		max-width: var(--max-width);
+		margin: 0 auto;
+		padding: var(--spacing-3xl) var(--spacing-lg) var(--spacing-5xl);
+	}
+
+	.post-back {
+		display: inline-block;
+		font-size: var(--font-size-sm);
+		color: var(--color-muted);
+		margin-bottom: var(--spacing-xl);
+		transition: color var(--transition-fast);
+	}
+
+	.post-back:hover {
+		color: var(--color-primary);
+	}
+
+	.post-header {
+		margin-bottom: var(--spacing-3xl);
+		padding-bottom: var(--spacing-xl);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.post-title {
+		font-size: var(--font-size-4xl);
+		font-weight: 800;
+		line-height: 1.15;
+		margin-bottom: var(--spacing-md);
+	}
+
+	.post-excerpt {
+		font-size: var(--font-size-lg);
+		color: var(--color-muted);
+		line-height: 1.6;
+	}
+
+	.post-body :global(h2) {
+		font-size: var(--font-size-2xl);
+		font-weight: 700;
+		margin-top: var(--spacing-3xl);
+		margin-bottom: var(--spacing-md);
+	}
+
+	.post-body :global(p) {
+		font-size: var(--font-size-base);
+		line-height: 1.8;
+		color: var(--color-text);
+		margin-bottom: var(--spacing-lg);
+	}
+</style>

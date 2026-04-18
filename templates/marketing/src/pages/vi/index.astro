@@ -1,9 +1,9 @@
 ---
 import { getEmDashEntry, getEmDashCollection } from "emdash";
-import Base from "../layouts/Base.astro";
-import MarketingBlocks from "../components/MarketingBlocks.astro";
+import Base from "../../layouts/Base.astro";
+import MarketingBlocks from "../../components/MarketingBlocks.astro";
 
-const { entry: page, cacheHint } = await getEmDashEntry("pages", "home");
+const { entry: page, cacheHint } = await getEmDashEntry("pages", "home", { locale: "vi" });
 
 try {
 	Astro.cache.set(cacheHint);
@@ -18,25 +18,25 @@ try {
 		orderBy: "created_at",
 		order: "desc",
 		limit: 6,
-		locale: "en",
+		locale: "vi",
 	});
 	latestPosts = result.entries || [];
 } catch {}
 ---
 
 <Base
-	title={pageTitle !== "Home" ? pageTitle : undefined}
-	description="Build products people actually want. The all-in-one platform for modern teams."
+	title={pageTitle !== "Trang chủ" ? pageTitle : undefined}
+	description="Xây dựng sản phẩm mà mọi người thực sự muốn. Nền tảng tất cả trong một cho đội ngũ hiện đại."
 >
 	{
 		pageContent ? (
 			<MarketingBlocks value={pageContent} />
 		) : (
 			<div class="empty-state">
-				<h1>Welcome to Acme</h1>
-				<p>Edit the home page content in the admin to get started.</p>
+				<h1>Chào mừng</h1>
+				<p>Chỉnh sửa nội dung trang chủ trong trang quản trị để bắt đầu.</p>
 				<a href="/_emdash/admin" class="btn btn-primary">
-					Open Admin
+					Mở trang quản trị
 				</a>
 			</div>
 		)
@@ -45,18 +45,18 @@ try {
 	{latestPosts && latestPosts.length > 0 && (
 		<section class="latest-posts">
 			<div class="container">
-				<h2 class="section-heading">Latest from the Blog</h2>
+				<h2 class="section-heading">Bài viết mới nhất</h2>
 				<div class="posts-grid">
 					{latestPosts.map((post) => (
-						<a href={`/posts/${post.id}`} class="post-card">
+						<a href={`/vi/posts/${post.id}`} class="post-card">
 							<h3 class="post-title">{post.data.title}</h3>
 							{post.data.excerpt && <p class="post-excerpt">{post.data.excerpt}</p>}
-							<span class="post-link">Read more &rarr;</span>
+							<span class="post-link">Đọc thêm &rarr;</span>
 						</a>
 					))}
 				</div>
 				<div class="posts-cta">
-					<a href="/posts" class="btn btn-secondary">View all posts &rarr;</a>
+					<a href="/vi/posts" class="btn btn-secondary">Xem tất cả &rarr;</a>
 				</div>
 			</div>
 		</section>
